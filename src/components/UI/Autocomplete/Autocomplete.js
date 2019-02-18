@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './Autocomplete.css';
+import './Autocomplete.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -31,7 +31,7 @@ export class Autocomplete extends Component {
       case 40:
         event.preventDefault();
         if (this.state.selectedItem === null) {
-          tthis.selectItem(0);
+          this.selectItem(0);
         } else if (this.state.selectedItem + 1 > this.props.searchResults.length - 1) {
           this.selectItem(0);
         } else {
@@ -89,7 +89,7 @@ export class Autocomplete extends Component {
             placeholder="Search for a show"
             onChange={this.props.searched}
             onKeyDown={this.handleKeyDown}
-            value={this.state.selectedValue}
+            // value={this.state.selectedValue}
           />
           <span className="icon is-small is-left">
             <FontAwesomeIcon icon="search" />

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { Autocomplete } from '../../components/UI/Autocomplete/Autocomplete';
 
-const apiKey = '6cddc8d7';
+import { APIKEY } from '../../axios/apiKey.constant';
 
 export class ShowSearch extends Component {
   state = {
@@ -15,7 +15,7 @@ export class ShowSearch extends Component {
 
     if (searchParameter.length > 3) {
       axios
-        .get(`http://www.omdbapi.com/?apikey=${apiKey}&r=json&type=series&s=${searchParameter}`)
+        .get(`http://www.omdbapi.com/?apikey=${APIKEY}&type=series&s=${searchParameter}`)
         .then(response => {
           if (response.data.Response === 'True') {
             this.setState({ searchResults: response.data.Search });
@@ -32,8 +32,8 @@ export class ShowSearch extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="is-vcentered">
+      <section className="section">
+        <div className="container">
           <form>
             <Autocomplete
               searched={this.onSearchedHandler}
@@ -42,7 +42,7 @@ export class ShowSearch extends Component {
             />
           </form>
         </div>
-      </div>
+      </section>
     );
   }
 }
