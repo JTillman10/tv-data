@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { APIKEY } from '../../axios/apiKey.constant';
 
@@ -8,17 +9,19 @@ import { Overview } from '../../components/Show/Overview/Overview';
 import { Seasons } from '../../components/Show/Seasons/Seasons';
 import { Episode } from '../../components/Show/Episode/Episode';
 
-export class ShowDetail extends Component {
+class ShowDetail extends Component {
   state = {
-    showId: 'tt0944947',
+    // showId: 'tt0944947',
     showInfo: null,
     selectedEpisode: null
   };
 
   componentDidMount() {
-    axios.get(`http://www.omdbapi.com/?apikey=${APIKEY}&i=${this.state.showId}`).then(response => {
-      this.setState({ showInfo: response.data });
-    });
+    axios
+      .get(`http://www.omdbapi.com/?apikey=${APIKEY}&i=${this.props.match.params.showId}`)
+      .then(response => {
+        this.setState({ showInfo: response.data });
+      });
   }
 
   episodeSelectedHandler = newEpisodeId => {
@@ -30,14 +33,14 @@ export class ShowDetail extends Component {
   render() {
     if (this.state.showInfo) {
       return (
-        <div>
+        <div className="section">
           <div className="container">
             <Overview data={this.state.showInfo} />
           </div>
           <div className="section">
             <div className="container">
               <Seasons
-                showId={this.state.showId}
+                showId={this.props.match.params.showId}
                 totalSeasons={this.state.showInfo.totalSeasons}
                 selectEpisode={this.episodeSelectedHandler}
               />
@@ -53,3 +56,5 @@ export class ShowDetail extends Component {
     }
   }
 }
+
+export default withRouter(ShowDetail);

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import { RatingsChart } from './RatingsChart/RatingsChart';
 import { SeasonList } from './SeasonsList/SeasonList';
@@ -20,7 +20,7 @@ export class Seasons extends Component {
 
   render() {
     return (
-      <Fragment>
+      <div className="box">
         <SeasonList
           currentSelectedSeason={this.state.selectedSeason}
           numberOfSeasons={this.props.totalSeasons}
@@ -32,7 +32,7 @@ export class Seasons extends Component {
           selectedSeason={this.state.selectedSeason}
           selectEpisode={this.props.selectEpisode}
         />
-      </Fragment>
+      </div>
     );
   }
 }

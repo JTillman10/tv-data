@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
 import { Autocomplete } from '../../components/UI/Autocomplete/Autocomplete';
 
 import { APIKEY } from '../../axios/apiKey.constant';
 
-export class ShowSearch extends Component {
+class ShowSearch extends Component {
   state = {
     searchResults: []
   };
@@ -26,8 +27,9 @@ export class ShowSearch extends Component {
     }
   };
 
-  onSelectedHandler = selectedShowIndex => {
-    console.log(this.state.searchResults[selectedShowIndex]);
+  onSelectedHandler = selectedItemIndex => {
+    const selectedShowId = this.state.searchResults[selectedItemIndex].imdbID;
+    this.props.history.push(`/shows/${selectedShowId}`);
   };
 
   render() {
@@ -46,3 +48,5 @@ export class ShowSearch extends Component {
     );
   }
 }
+
+export default withRouter(ShowSearch);

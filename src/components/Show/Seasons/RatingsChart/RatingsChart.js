@@ -50,22 +50,42 @@ export class RatingsChart extends Component {
         return {
           name: episode.Title,
           id: episode.imdbID,
-          y: parseFloat(episode.imdbRating)
+          y: parseFloat(episode.imdbRating),
+          episode: episode.Episode
         };
       });
 
       const options = {
+        credits: {
+          enabled: false
+        },
         title: {
           text: null
         },
         series: [
           {
+            showInLegend: false,
             data,
             lineWidth: 5
           }
         ],
+        yAxis: {
+          title: {
+            enabled: false
+          }
+        },
+        tooltip: {
+          // headerFormat: `<span style="font-size: 10px">{point.number} - {point.key}</span>  <b>({point.y})</b>`,
+          // pointFormat: undefined
+          formatter: function() {
+            return `<span style="font-size: 10px">E${this.point.episode} ${
+              this.point.name
+            }</span>  <b>(${this.point.y})</b>`;
+          }
+        },
         plotOptions: {
           series: {
+            allowPointSelect: true,
             cursor: 'pointer',
             point: {
               events: {
@@ -73,7 +93,8 @@ export class RatingsChart extends Component {
                   this.props.selectEpisode(e.point.id);
                 }
               }
-            }
+            },
+            pointStart: 1
           }
         }
       };

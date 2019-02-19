@@ -42,12 +42,14 @@ export class Autocomplete extends Component {
 
         return;
       default:
+        this.selectItem(null);
         return;
     }
   };
 
   selectItem = index => {
-    this.setState({ selectedItem: index, selectedValue: this.props.searchResults[index].Title });
+    // this.setState({ selectedItem: index, selectedValue: this.props.searchResults[index].Title });
+    this.setState({ selectedItem: index });
   };
 
   handleClick = event => {
@@ -63,7 +65,7 @@ export class Autocomplete extends Component {
           <ul className="menu-list">
             {this.props.searchResults.map((result, index) => {
               return (
-                <li key={result.imdbID}>
+                <li key={`${result.imdbID}-${index}`}>
                   <a
                     href="/"
                     className={this.state.selectedItem === index ? 'selected' : ''}
