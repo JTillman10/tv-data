@@ -19,7 +19,7 @@ export class Autocomplete extends Component {
         event.preventDefault();
         if (this.state.selectedItem === null) {
           this.selectItem(this.props.searchResults.length - 1);
-        } else if (this.state.selectedItem - 1 === 0) {
+        } else if (this.state.selectedItem - 1 < 0) {
           this.selectItem(this.props.searchResults.length - 1);
         } else {
           this.setState(prevState => ({
