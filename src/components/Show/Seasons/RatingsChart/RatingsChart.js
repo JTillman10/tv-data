@@ -25,7 +25,7 @@ export class RatingsChart extends Component {
       const seasonPromises = [];
       for (let i = 1; i <= this.props.numberOfSeasons; i++) {
         seasonPromises.push(() =>
-          axios.get(`http://www.omdbapi.com/?apikey=${APIKEY}&i=${this.props.showId}&season=${i}`)
+          axios.get(`https://www.omdbapi.com/?apikey=${APIKEY}&i=${this.props.showId}&season=${i}`)
         );
       }
 
@@ -37,7 +37,7 @@ export class RatingsChart extends Component {
       );
     } else {
       axios
-        .get(`http://www.omdbapi.com/?apikey=${APIKEY}&i=${this.props.showId}&season=${season}`)
+        .get(`https://www.omdbapi.com/?apikey=${APIKEY}&i=${this.props.showId}&season=${season}`)
         .then(response => {
           this.setState({ episodes: response.data.Episodes });
         });

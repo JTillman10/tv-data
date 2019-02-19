@@ -16,7 +16,7 @@ class ShowSearch extends Component {
 
     if (searchParameter.length > 3) {
       axios
-        .get(`http://www.omdbapi.com/?apikey=${APIKEY}&type=series&s=${searchParameter}`)
+        .get(`https://www.omdbapi.com/?apikey=${APIKEY}&type=series&s=${searchParameter}`)
         .then(response => {
           if (response.data.Response === 'True') {
             this.setState({ searchResults: response.data.Search });

@@ -18,14 +18,14 @@ class ShowDetail extends Component {
 
   componentDidMount() {
     axios
-      .get(`http://www.omdbapi.com/?apikey=${APIKEY}&i=${this.props.match.params.showId}`)
+      .get(`https://www.omdbapi.com/?apikey=${APIKEY}&i=${this.props.match.params.showId}`)
       .then(response => {
         this.setState({ showInfo: response.data });
       });
   }
 
   episodeSelectedHandler = newEpisodeId => {
-    axios.get(`http://www.omdbapi.com/?apikey=${APIKEY}&i=${newEpisodeId}`).then(response => {
+    axios.get(`https://www.omdbapi.com/?apikey=${APIKEY}&i=${newEpisodeId}`).then(response => {
       this.setState({ selectedEpisode: response.data });
     });
   };
