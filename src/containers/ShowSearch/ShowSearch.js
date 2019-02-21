@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 import { Autocomplete } from '../../components/UI/Autocomplete/Autocomplete';
 
-import { Search } from '../../axios/search';
+import { SearchShow } from '../../axios/search';
 
 class ShowSearch extends Component {
   state = {
@@ -14,7 +14,7 @@ class ShowSearch extends Component {
     const searchParameter = event.target.value;
 
     if (searchParameter.length > 3) {
-      Search.get(``, { params: { query: searchParameter } }).then(response => {
+      SearchShow(searchParameter).then(response => {
         this.setState({ searchResults: response.data.results });
       });
     } else {
