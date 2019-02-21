@@ -1,7 +1,6 @@
 import axios from 'axios';
-
-const apiKey = '6cddc8d7';
+import { APIKEY } from './apiKey.constant';
 
 export const Search = axios.create({
-  baseURL: `https://www.omdbapi.com/?apikey=${apiKey}&r=json&type=series`
+  baseURL: `https://api.themoviedb.org/3/search/tv?api_key=${APIKEY}`
 });
