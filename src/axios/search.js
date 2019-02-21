@@ -1,7 +1,6 @@
 import axios from 'axios';
+import { APIKEY, BASEURL } from './constants';
 
-const apiKey = '6cddc8d7';
-
-export const Search = axios.create({
-  baseURL: `https://www.omdbapi.com/?apikey=${apiKey}&r=json&type=series`
-});
+export const SearchShow = searchParameter => {
+  return axios.get(`${BASEURL}/search/tv`, { params: { api_key: APIKEY, query: searchParameter } });
+};

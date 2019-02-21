@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { APIKEY } from '../../../../axios/apiKey.constant';
 
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+
+import { GetSeason, GetAllSeasons } from '../../../../axios/tv';
 
 export class RatingsChart extends Component {
   state = {
@@ -22,36 +22,26 @@ export class RatingsChart extends Component {
 
   getEpisodes(season) {
     if (season === 'all') {
-      const seasonPromises = [];
-      for (let i = 1; i <= this.props.numberOfSeasons; i++) {
-        seasonPromises.push(() =>
-          axios.get(`https://www.omdbapi.com/?apikey=${APIKEY}&i=${this.props.showId}&season=${i}`)
-        );
-      }
-
-      axios.all(seasonPromises.map(promise => promise())).then(
-        axios.spread((...rest) => {
-          const episodes = rest.map(season => season.data.Episodes).flat();
-          this.setState({ episodes });
-        })
-      );
+      GetAllSeasons(this.props.showId, this.props.numberOfSeasons).then(results => {
+        this.setState({ episodes: results });
+      });
     } else {
-      axios
-        .get(`https://www.omdbapi.com/?apikey=${APIKEY}&i=${this.props.showId}&season=${season}`)
-        .then(response => {
-          this.setState({ episodes: response.data.Episodes });
-        });
+      GetSeason(this.props.showId, season).then(response => {
+        this.setState({ episodes: response.data.episodes });
+      });
     }
   }
 
   render() {
     if (this.state.episodes) {
       const data = this.state.episodes.map(episode => {
+        const { name, id, vote_average, season_number, episode_number } = episode;
         return {
-          name: episode.Title,
-          id: episode.imdbID,
-          y: parseFloat(episode.imdbRating),
-          episode: episode.Episode
+          name,
+          id,
+          y: parseFloat(vote_average),
+          season: season_number,
+          episode: episode_number
         };
       });
 
@@ -90,7 +80,7 @@ export class RatingsChart extends Component {
             point: {
               events: {
                 click: e => {
-                  this.props.selectEpisode(e.point.id);
+                  this.props.selectEpisode(e.point.season, e.point.episode);
                 }
               }
             },

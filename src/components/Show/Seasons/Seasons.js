@@ -16,8 +16,6 @@ export class Seasons extends Component {
     this.setState({ selectedSeason: newSeason });
   };
 
-  //TODO: slide toggle for all seasons or individual season
-
   render() {
     return (
       <div className="box">
