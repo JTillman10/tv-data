@@ -1,29 +1,24 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { Autocomplete } from '../../components/UI/Autocomplete/Autocomplete';
 
 import { SearchShow } from '../../axios/search';
+import { search } from '../../store/search/search.actions';
 
 class ShowSearch extends Component {
-  state = {
-    searchResults: []
-  };
+  componentDidMount() {
+    this.props.onSearch('');
+  }
 
   onSearchedHandler = event => {
     const searchParameter = event.target.value;
-
-    if (searchParameter.length > 3) {
-      SearchShow(searchParameter).then(response => {
-        this.setState({ searchResults: response.data.results });
-      });
-    } else {
-      this.setState({ searchResults: [] });
-    }
+    this.props.onSearch(searchParameter);
   };
 
   onSelectedHandler = selectedItemIndex => {
-    const selectedShowId = this.state.searchResults[selectedItemIndex].id;
+    const selectedShowId = this.props.searchResults[selectedItemIndex].id;
     this.props.history.push(`/shows/${selectedShowId}`);
   };
 
@@ -35,7 +30,7 @@ class ShowSearch extends Component {
             <Autocomplete
               searched={this.onSearchedHandler}
               selected={this.onSelectedHandler}
-              searchResults={this.state.searchResults}
+              searchResults={this.props.searchResults}
             />
           </form>
         </div>
@@ -44,4 +39,19 @@ class ShowSearch extends Component {
   }
 }
 
-export default withRouter(ShowSearch);
+const mapStateToProps = state => {
+  return {
+    searchResults: state.search.searchResults
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSearch: searchParameter => dispatch(search(searchParameter))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(ShowSearch));
