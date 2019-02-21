@@ -70,7 +70,7 @@ workflows:
       - install
       - test:
         requires:
-          - build
+          - install
         filters:
           branches:
             only: master
