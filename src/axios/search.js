@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { APIKEY } from './apiKey.constant';
+import { APIKEY, BASEURL } from './constants';
 
-export const Search = axios.create({
-  baseURL: `https://api.themoviedb.org/3/search/tv?api_key=${APIKEY}`
-});
+export const SearchShow = searchParameter => {
+  return axios.get(`${BASEURL}/search/tv`, { params: { api_key: APIKEY, query: searchParameter } });
+};
