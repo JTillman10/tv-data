@@ -1,33 +1,9 @@
-# version: 2
-# jobs:
-#   build:
-#     docker:
-#       - image: 'circleci/node:8'
-#     working_directory: ~/repo
-#     steps:
-#       - checkout
-#       - restore_cache:
-#           keys:
-#             - 'v1-dependencies-{{ checksum "package.json" }}'
-#             - v1-dependencies-
-#       - run: 'yarn install'
-#       - save_cache:
-#           paths:
-#             - node_modules
-#           key: 'v1-dependencies-{{ checksum "package.json" }}'
-#       - run: 'yarn test'
-#       - run:
-#           name: 'Build Project'
-#           command: 'yarn build'
-#       - run:
-#           name: 'Deploy to Firebase Hosting'
-#           command: './node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN'
 version: 2
 jobs:
-  install:
-    working_directory: ~/repo
+  build:
     docker:
       - image: 'circleci/node:8'
+    working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
@@ -39,50 +15,74 @@ jobs:
           paths:
             - node_modules
           key: 'v1-dependencies-{{ checksum "package.json" }}'
-  test:
-    docker:
-      - image: 'circleci/node:8'
-    steps:
-      - checkout
       - run: 'yarn test'
-      #code coverage here https://circleci.com/docs/2.0/sample-config/
-  build:
-    docker:
-      - image: 'circleci/node:8'
-    steps:
-      - checkout
       - run:
           name: 'Build Project'
           command: 'yarn build'
-  deploy:
-    docker:
-      - image: 'circleci/node:8'
-    steps:
-      - checkout
       - run:
           name: 'Deploy to Firebase Hosting'
           command: './node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN'
+# version: 2
+# jobs:
+#   install:
+#     working_directory: ~/repo
+#     docker:
+#       - image: 'circleci/node:8'
+#     steps:
+#       - checkout
+#       - restore_cache:
+#           keys:
+#             - 'v1-dependencies-{{ checksum "package.json" }}'
+#             - v1-dependencies-
+#       - run: 'yarn install'
+#       - save_cache:
+#           paths:
+#             - node_modules
+#           key: 'v1-dependencies-{{ checksum "package.json" }}'
+#   test:
+#     docker:
+#       - image: 'circleci/node:8'
+#     steps:
+#       - checkout
+#       - run: 'yarn test'
+#       #code coverage here https://circleci.com/docs/2.0/sample-config/
+#   build:
+#     docker:
+#       - image: 'circleci/node:8'
+#     steps:
+#       - checkout
+#       - run:
+#           name: 'Build Project'
+#           command: 'yarn build'
+#   deploy:
+#     docker:
+#       - image: 'circleci/node:8'
+#     steps:
+#       - checkout
+#       - run:
+#           name: 'Deploy to Firebase Hosting'
+#           command: './node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN'
 
-workflows:
-  version: 2
-  install_and_test_and_build_and_deploy:
-    jobs:
-      - install
-      - test:
-          requires:
-            - install
-          filters:
-            branches:
-              only: master
-      - build:
-          requires:
-            - test
-          filters:
-            branches:
-              only: master
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
+# workflows:
+#   version: 2
+#   install_and_test_and_build_and_deploy:
+#     jobs:
+#       - install
+#       - test:
+#           requires:
+#             - install
+#           filters:
+#             branches:
+#               only: master
+#       - build:
+#           requires:
+#             - test
+#           filters:
+#             branches:
+#               only: master
+#       - deploy:
+#           requires:
+#             - build
+#           filters:
+#             branches:
+#               only: master
