@@ -69,20 +69,20 @@ workflows:
     jobs:
       - install
       - test:
-        requires:
-          - install
-        filters:
-          branches:
-            only: master
+          requires:
+            - install
+          filters:
+            branches:
+              only: master
       - build:
-        requires:
-          - test
-        filters:
-          branches:
-            only: master
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
       - deploy:
-        requires:
-          - build
-        filters:
-          branches:
-            only: master
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
