@@ -72,7 +72,7 @@ export class Autocomplete extends Component {
                     onMouseOver={() => this.selectItem(index)}
                     onClick={this.handleClick}
                   >
-                    {result.Title} ({result.Year})
+                    {result.name} ({result.first_air_date.split('-')[0]})
                   </a>
                 </li>
               );

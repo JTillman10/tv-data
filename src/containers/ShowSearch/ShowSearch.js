@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
 
 import { Autocomplete } from '../../components/UI/Autocomplete/Autocomplete';
 
-import { APIKEY } from '../../axios/apiKey.constant';
+import { Search } from '../../axios/search';
 
 class ShowSearch extends Component {
   state = {
@@ -15,20 +14,16 @@ class ShowSearch extends Component {
     const searchParameter = event.target.value;
 
     if (searchParameter.length > 3) {
-      axios
-        .get(`https://www.omdbapi.com/?apikey=${APIKEY}&type=series&s=${searchParameter}`)
-        .then(response => {
-          if (response.data.Response === 'True') {
-            this.setState({ searchResults: response.data.Search });
-          }
-        });
+      Search.get(``, { params: { query: searchParameter } }).then(response => {
+        this.setState({ searchResults: response.data.results });
+      });
     } else {
       this.setState({ searchResults: [] });
     }
   };
 
   onSelectedHandler = selectedItemIndex => {
-    const selectedShowId = this.state.searchResults[selectedItemIndex].imdbID;
+    const selectedShowId = this.state.searchResults[selectedItemIndex].id;
     this.props.history.push(`/shows/${selectedShowId}`);
   };
 
