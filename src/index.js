@@ -13,6 +13,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 
 import { SearchReducer } from './store/search/search.reducer';
+import { ShowReducer } from './store/show/show.reducer';
 
 const composeEnhancers =
   process.env.NODE_ENV === 'development'
@@ -20,7 +21,8 @@ const composeEnhancers =
     : null || compose;
 
 const rootReducer = combineReducers({
-  search: SearchReducer
+  search: SearchReducer,
+  show: ShowReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
