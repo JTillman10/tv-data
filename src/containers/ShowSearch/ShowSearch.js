@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import { Autocomplete } from '../../components/UI/Autocomplete/Autocomplete';
 
-import { SearchShow } from '../../axios/search';
 import { search } from '../../store/search/search.actions';
 
 class ShowSearch extends Component {
