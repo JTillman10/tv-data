@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Autocomplete } from '../../components/UI/Autocomplete/Autocomplete';
+import Autocomplete from '../../components/UI/Autocomplete/Autocomplete';
 
 import { search } from '../../store/search/search.actions';
 
