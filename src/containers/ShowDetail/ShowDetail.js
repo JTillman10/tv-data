@@ -1,50 +1,47 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './ShowDetail.scss';
 
-import { GetShow, GetEpisode } from '../../axios/tv';
-
 import { Overview } from '../../components/Show/Overview/Overview';
-import { Seasons } from '../../components/Show/Seasons/Seasons';
+import Seasons from '../../components/Show/Seasons/Seasons';
 import { Episode } from '../../components/Show/Episode/Episode';
 
-class ShowDetail extends Component {
-  state = {
-    showInfo: null,
-    selectedEpisode: null
-  };
+import { getShow, getEpisode } from '../../store/show/show.actions';
 
+class ShowDetail extends Component {
   componentDidMount() {
-    GetShow(this.props.match.params.showId).then(response => {
-      this.setState({ showInfo: response.data });
-    });
+    this.props.onGetShow(this.props.match.params.showId);
   }
 
   episodeSelectedHandler = (seasonNumber, episodeNumber) => {
-    GetEpisode(this.props.match.params.showId, seasonNumber, episodeNumber).then(response => {
-      this.setState({ selectedEpisode: response.data });
-    });
+    this.props.onGetEpisode(this.props.match.params.showId, seasonNumber, episodeNumber);
+  };
+
+  selectSeasonHandler = () => {
+    // TODO: add reset episode action
   };
 
   render() {
-    if (this.state.showInfo) {
+    if (this.props.showInfo) {
       return (
         <div className="section">
           <div className="container">
-            <Overview data={this.state.showInfo} />
+            <Overview data={this.props.showInfo} />
           </div>
           <div className="section">
             <div className="container">
               <Seasons
                 showId={this.props.match.params.showId}
-                totalSeasons={this.state.showInfo.number_of_seasons}
+                totalSeasons={this.props.showInfo.number_of_seasons}
                 selectEpisode={this.episodeSelectedHandler}
+                selectSeason={this.selectSeasonHandler}
               />
             </div>
           </div>
           <div className="container">
-            <Episode episode={this.state.selectedEpisode} />
+            <Episode episode={this.props.selectedEpisode} />
           </div>
         </div>
       );
@@ -54,4 +51,22 @@ class ShowDetail extends Component {
   }
 }
 
-export default withRouter(ShowDetail);
+const mapStateToProps = state => {
+  return {
+    showInfo: state.show.showInfo,
+    selectedEpisode: state.show.selectedEpisode
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onGetShow: showId => dispatch(getShow(showId)),
+    onGetEpisode: (showId, seasonNumber, episodeNumber) =>
+      dispatch(getEpisode(showId, seasonNumber, episodeNumber))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(ShowDetail));
