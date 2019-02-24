@@ -33,16 +33,36 @@ const highlightItem = (state, action) => {
 };
 
 const highlightItemDown = state => {
+  let newHighlightedItem;
+
+  if (state.highlightedItem === null) {
+    newHighlightedItem = 0;
+  } else if (state.highlightedItem + 1 > state.searchResults.length - 1) {
+    newHighlightedItem = 0;
+  } else {
+    newHighlightedItem = state.highlightedItem + 1;
+  }
+
   return {
     ...state,
-    highlightedItem: state.highlightedItem + 1
+    highlightedItem: newHighlightedItem
   };
 };
 
 const highlightItemUp = state => {
+  let newHighlightedItem;
+
+  if (state.highlightedItem === null) {
+    newHighlightedItem = state.searchResults.length - 1;
+  } else if (state.highlightedItem - 1 < 0) {
+    newHighlightedItem = state.searchResults.length - 1;
+  } else {
+    newHighlightedItem = state.highlightedItem - 1;
+  }
+
   return {
     ...state,
-    highlightedItem: state.highlightedItem - 1
+    highlightedItem: newHighlightedItem
   };
 };
 

@@ -20,25 +20,11 @@ export class Search extends Component {
         return;
       case 38:
         event.preventDefault();
-        if (this.props.highlightedItem === null) {
-          this.selectItem(this.props.searchResults.length - 1);
-        } else if (this.props.highlightedItem - 1 < 0) {
-          this.selectItem(this.props.searchResults.length - 1);
-        } else {
-          this.props.onHighlightItemUp();
-        }
-
+        this.props.onHighlightItemUp();
         return;
       case 40:
         event.preventDefault();
-        if (this.props.highlightedItem === null) {
-          this.selectItem(0);
-        } else if (this.props.highlightedItem + 1 > this.props.searchResults.length - 1) {
-          this.selectItem(0);
-        } else {
-          this.props.onHighlightItemDown();
-        }
-
+        this.props.onHighlightItemDown();
         return;
       default:
         this.selectItem(null);
