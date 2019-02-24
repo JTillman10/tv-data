@@ -6,7 +6,7 @@ import { Seasons } from './Seasons';
 import { SeasonList } from './SeasonsList/SeasonList';
 import { RatingsChart } from './RatingsChart/RatingsChart';
 
-describe('<Search />', () => {
+describe('<Seasons />', () => {
   let wrapper;
 
   const onGetEpisodesForSeasonFunction = jest.fn();
