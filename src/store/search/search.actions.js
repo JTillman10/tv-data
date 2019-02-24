@@ -1,10 +1,10 @@
-import { SearchShow } from '../../axios/search';
+import { SearchShow } from '../../api/search';
 
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
 export const RESET_RESULTS = 'RESET_RESULTS';
-export const SELECT_ITEM_DOWN = 'SELECT_ITEM_DOWN';
-export const SELECT_ITEM_UP = 'SELECT_ITEM_UP';
-export const SELECT_ITEM = 'SELECT_ITEM';
+export const HIGHLIGHT_ITEM_DOWN = 'HIGHLIGHT_ITEM_DOWN';
+export const HIGHLIGHT_ITEM_UP = 'HIGHLIGHT_ITEM_UP';
+export const HIGHLIGHT_ITEM = 'HIGHLIGHT_ITEM';
 
 const searchSuccess = searchResults => {
   return {
@@ -31,19 +31,19 @@ export const search = searchParameter => {
   };
 };
 
-export const selectItem = selectedItem => {
+export const highlightItem = highlightedItem => {
   return {
-    type: SELECT_ITEM,
-    selectedItem
+    type: HIGHLIGHT_ITEM,
+    highlightedItem
   };
 };
-export const selectItemDown = () => {
+export const highlightItemDown = () => {
   return {
-    type: SELECT_ITEM_DOWN
+    type: HIGHLIGHT_ITEM_DOWN
   };
 };
-export const selectItemUp = () => {
+export const highlightItemUp = () => {
   return {
-    type: SELECT_ITEM_UP
+    type: HIGHLIGHT_ITEM_UP
   };
 };

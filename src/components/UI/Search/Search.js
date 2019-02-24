@@ -1,38 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import './Autocomplete.scss';
+import './Search.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { selectItem, selectItemDown, selectItemUp } from '../../../store/search/search.actions';
+import {
+  highlightItem,
+  highlightItemDown,
+  highlightItemUp
+} from '../../../store/search/search.actions';
 
-class Autocomplete extends Component {
+export class Search extends Component {
   handleKeyDown = event => {
     switch (event.keyCode) {
       case 13:
         event.preventDefault();
-        this.props.selected(this.props.selectedItem);
+        this.props.selected(this.props.highlightedItem);
         return;
       case 38:
         event.preventDefault();
-        if (this.props.selectedItem === null) {
+        if (this.props.highlightedItem === null) {
           this.selectItem(this.props.searchResults.length - 1);
-        } else if (this.props.selectedItem - 1 < 0) {
+        } else if (this.props.highlightedItem - 1 < 0) {
           this.selectItem(this.props.searchResults.length - 1);
         } else {
-          this.props.onSelectItemUp();
+          this.props.onHighlightItemUp();
         }
 
         return;
       case 40:
         event.preventDefault();
-        if (this.props.selectedItem === null) {
+        if (this.props.highlightedItem === null) {
           this.selectItem(0);
-        } else if (this.props.selectedItem + 1 > this.props.searchResults.length - 1) {
+        } else if (this.props.highlightedItem + 1 > this.props.searchResults.length - 1) {
           this.selectItem(0);
         } else {
-          this.props.onSelectItemDown();
+          this.props.onHighlightItemDown();
         }
 
         return;
@@ -43,12 +47,12 @@ class Autocomplete extends Component {
   };
 
   selectItem = index => {
-    this.props.onSelectItem(index);
+    this.props.onHighlightItem(index);
   };
 
   handleClick = event => {
     event.preventDefault();
-    this.props.selected(this.props.selectedItem);
+    this.props.selected(this.props.highlightedItem);
   };
 
   render() {
@@ -59,10 +63,10 @@ class Autocomplete extends Component {
           <ul className="menu-list">
             {this.props.searchResults.map((result, index) => {
               return (
-                <li key={`${result.imdbID}-${index}`}>
+                <li key={`${result.id}-${index}`}>
                   <a
                     href="/"
-                    className={this.props.selectedItem === index ? 'selected' : ''}
+                    className={this.props.highlightedItem === index ? 'selected' : ''}
                     onMouseOver={() => this.selectItem(index)}
                     onClick={this.handleClick}
                   >
@@ -99,19 +103,19 @@ class Autocomplete extends Component {
 
 const mapStateToProps = state => {
   return {
-    selectedItem: state.search.selectedItem
+    highlightedItem: state.search.highlightedItem
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSelectItem: selectedItem => dispatch(selectItem(selectedItem)),
-    onSelectItemDown: () => dispatch(selectItemDown()),
-    onSelectItemUp: () => dispatch(selectItemUp())
+    onHighlightItem: highlightedItem => dispatch(highlightItem(highlightedItem)),
+    onHighlightItemDown: () => dispatch(highlightItemDown()),
+    onHighlightItemUp: () => dispatch(highlightItemUp())
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Autocomplete);
+)(Search);

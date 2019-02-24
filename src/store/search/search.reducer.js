@@ -1,14 +1,14 @@
 import {
   SEARCH_SUCCESS,
   RESET_RESULTS,
-  SELECT_ITEM,
-  SELECT_ITEM_DOWN,
-  SELECT_ITEM_UP
+  HIGHLIGHT_ITEM,
+  HIGHLIGHT_ITEM_DOWN,
+  HIGHLIGHT_ITEM_UP
 } from './search.actions';
 
 const initialState = {
   searchResults: [],
-  selectedItem: null
+  highlightedItem: null
 };
 
 const searchSuccess = (state, action) => {
@@ -25,24 +25,24 @@ const resetResults = state => {
   };
 };
 
-const selectItem = (state, action) => {
+const highlightItem = (state, action) => {
   return {
     ...state,
-    selectedItem: action.selectedItem
+    highlightedItem: action.highlightedItem
   };
 };
 
-const selectItemDown = state => {
+const highlightItemDown = state => {
   return {
     ...state,
-    selectedItem: state.selectedItem + 1
+    highlightedItem: state.highlightedItem + 1
   };
 };
 
-const selectItemUp = state => {
+const highlightItemUp = state => {
   return {
     ...state,
-    selectedItem: state.selectedItem - 1
+    highlightedItem: state.highlightedItem - 1
   };
 };
 
@@ -52,12 +52,12 @@ export const SearchReducer = (state = initialState, action) => {
       return searchSuccess(state, action);
     case RESET_RESULTS:
       return resetResults(state);
-    case SELECT_ITEM:
-      return selectItem(state, action);
-    case SELECT_ITEM_DOWN:
-      return selectItemDown(state, action);
-    case SELECT_ITEM_UP:
-      return selectItemUp(state, action);
+    case HIGHLIGHT_ITEM:
+      return highlightItem(state, action);
+    case HIGHLIGHT_ITEM_DOWN:
+      return highlightItemDown(state, action);
+    case HIGHLIGHT_ITEM_UP:
+      return highlightItemUp(state, action);
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-import { GetAllSeasons, GetEpisode, GetSeason, GetShow } from '../../axios/tv';
+import { GetAllSeasons, GetEpisode, GetSeason, GetShow } from '../../api/tv';
 
 export const GET_SHOW = 'GET_SHOW';
 export const GET_EPISODE = 'GET_EPISODE';

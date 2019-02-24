@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Autocomplete from '../../components/UI/Autocomplete/Autocomplete';
+import Search from '../../components/UI/Search/Search';
 
 import { search } from '../../store/search/search.actions';
 
@@ -26,7 +26,7 @@ class ShowSearch extends Component {
       <section className="section">
         <div className="container">
           <form>
-            <Autocomplete
+            <Search
               searched={this.onSearchedHandler}
               selected={this.onSelectedHandler}
               searchResults={this.props.searchResults}
