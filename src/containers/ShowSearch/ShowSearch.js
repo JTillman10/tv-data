@@ -6,7 +6,7 @@ import Search from '../../components/UI/Search/Search';
 
 import { search } from '../../store/search/search.actions';
 
-class ShowSearch extends Component {
+export class ShowSearch extends Component {
   componentDidMount() {
     this.props.onSearch('');
   }

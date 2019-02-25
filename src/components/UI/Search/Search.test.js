@@ -19,13 +19,6 @@ describe('<Search />', () => {
     let input;
 
     beforeEach(() => {
-      wrapper = shallow(
-        <Search
-          searchResults={[]}
-          searched={searchedFunction}
-          onHighlightItem={onHighlightItemFunction}
-        />
-      );
       wrapper.setProps({
         searchResults: [],
         searched: searchedFunction,
