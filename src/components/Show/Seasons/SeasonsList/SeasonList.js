@@ -3,7 +3,7 @@ import React from 'react';
 export const SeasonList = props => {
   let seasonList = [];
 
-  for (let i = 1; i < props.numberOfSeasons; i++) {
+  for (let i = 1; i <= props.numberOfSeasons; i++) {
     seasonList.push(
       <option key={i} value={i}>
         Season {i}

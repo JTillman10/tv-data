@@ -47,7 +47,7 @@ export class Seasons extends Component {
 
 const mapStateToProps = state => {
   return {
-    selectedSeason: state.show.selectSeason,
+    selectedSeason: state.show.selectedSeason,
     episodes: state.show.episodes
   };
 };
