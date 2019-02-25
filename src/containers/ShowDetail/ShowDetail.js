@@ -28,7 +28,11 @@ class ShowDetail extends Component {
       return (
         <div className="section">
           <div className="container">
-            <Overview data={this.props.showInfo} />
+            <Overview
+              name={this.props.showInfo.original_name}
+              airDate={this.props.showInfo.first_air_date}
+              summary={this.props.showInfo.overview}
+            />
           </div>
           <div className="section">
             <div className="container">
