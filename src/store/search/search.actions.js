@@ -22,7 +22,7 @@ const resetSearchResults = () => {
 export const search = searchParameter => {
   return dispatch => {
     if (searchParameter.length > 3) {
-      SearchShow(searchParameter).then(response => {
+      return SearchShow(searchParameter).then(response => {
         dispatch(searchSuccess(response.data.results));
       });
     } else {
@@ -37,11 +37,13 @@ export const highlightItem = highlightedItem => {
     highlightedItem
   };
 };
+
 export const highlightItemDown = () => {
   return {
     type: HIGHLIGHT_ITEM_DOWN
   };
 };
+
 export const highlightItemUp = () => {
   return {
     type: HIGHLIGHT_ITEM_UP
