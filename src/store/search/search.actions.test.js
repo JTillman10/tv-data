@@ -18,7 +18,7 @@ import {
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('Search Actions', () => {
+describe('SearchActions', () => {
   describe('search', () => {
     let store;
 

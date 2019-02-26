@@ -18,7 +18,7 @@ import {
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('Show Actions', () => {
+describe('ShowActions', () => {
   let store;
 
   beforeEach(() => {
