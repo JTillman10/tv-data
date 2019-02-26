@@ -6,7 +6,7 @@ import { SeasonList } from './SeasonsList/SeasonList';
 
 import { getEpisodesForSeason, updateSelectedSeason } from '../../../store/show/show.actions';
 
-class Seasons extends Component {
+export class Seasons extends Component {
   selectSeasonHandler = event => {
     const newSeasonNumber = event.target.value;
     event.preventDefault();
@@ -38,7 +38,7 @@ class Seasons extends Component {
           episodes={this.props.episodes}
           numberOfSeasons={this.props.totalSeasons}
           selectedSeason={this.props.selectedSeason}
-          selectEpisode={this.props.selectEpisode}
+          onSelectEpisode={this.props.selectEpisode}
         />
       </div>
     );
@@ -47,7 +47,7 @@ class Seasons extends Component {
 
 const mapStateToProps = state => {
   return {
-    selectedSeason: state.show.selectSeason,
+    selectedSeason: state.show.selectedSeason,
     episodes: state.show.episodes
   };
 };

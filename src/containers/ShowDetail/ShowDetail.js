@@ -10,7 +10,7 @@ import { Episode } from '../../components/Show/Episode/Episode';
 
 import { getShow, getEpisode } from '../../store/show/show.actions';
 
-class ShowDetail extends Component {
+export class ShowDetail extends Component {
   componentDidMount() {
     this.props.onGetShow(this.props.match.params.showId);
   }
@@ -19,7 +19,7 @@ class ShowDetail extends Component {
     this.props.onGetEpisode(this.props.match.params.showId, seasonNumber, episodeNumber);
   };
 
-  selectSeasonHandler = () => {
+  seasonSelectedHandler = () => {
     // TODO: add reset episode action
   };
 
@@ -28,7 +28,11 @@ class ShowDetail extends Component {
       return (
         <div className="section">
           <div className="container">
-            <Overview data={this.props.showInfo} />
+            <Overview
+              name={this.props.showInfo.original_name}
+              airDate={this.props.showInfo.first_air_date}
+              summary={this.props.showInfo.overview}
+            />
           </div>
           <div className="section">
             <div className="container">
@@ -36,7 +40,7 @@ class ShowDetail extends Component {
                 showId={this.props.match.params.showId}
                 totalSeasons={this.props.showInfo.number_of_seasons}
                 selectEpisode={this.episodeSelectedHandler}
-                selectSeason={this.selectSeasonHandler}
+                selectSeason={this.seasonSelectedHandler}
               />
             </div>
           </div>

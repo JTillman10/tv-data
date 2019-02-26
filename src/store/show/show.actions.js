@@ -1,4 +1,4 @@
-import { GetAllSeasons, GetEpisode, GetSeason, GetShow } from '../../axios/tv';
+import { GetAllSeasons, GetEpisode, GetSeason, GetShow } from '../../api/show';
 
 export const GET_SHOW = 'GET_SHOW';
 export const GET_EPISODE = 'GET_EPISODE';
@@ -28,7 +28,7 @@ const getEpisodesForSeasonSuccess = episodes => {
 
 export const getShow = showId => {
   return dispatch => {
-    GetShow(showId).then(response => {
+    return GetShow(showId).then(response => {
       dispatch(getShowSuccess(response.data));
     });
   };
@@ -36,7 +36,7 @@ export const getShow = showId => {
 
 export const getEpisode = (showId, seasonNumber, episodeNumber) => {
   return dispatch => {
-    GetEpisode(showId, seasonNumber, episodeNumber).then(response => {
+    return GetEpisode(showId, seasonNumber, episodeNumber).then(response => {
       dispatch(getEpisodeSuccess(response.data));
     });
   };
@@ -45,12 +45,12 @@ export const getEpisode = (showId, seasonNumber, episodeNumber) => {
 export const getEpisodesForSeason = (showId, seasonNumber, totalSeasons) => {
   return dispatch => {
     if (seasonNumber === 'all') {
-      GetAllSeasons(showId, totalSeasons).then(response => {
+      return GetAllSeasons(showId, totalSeasons).then(response => {
         const episodes = response;
         dispatch(getEpisodesForSeasonSuccess(episodes));
       });
     } else {
-      GetSeason(showId, seasonNumber).then(response => {
+      return GetSeason(showId, seasonNumber).then(response => {
         const episodes = response.data.episodes;
         dispatch(getEpisodesForSeasonSuccess(episodes));
       });

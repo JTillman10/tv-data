@@ -49,7 +49,7 @@ export const RatingsChart = props => {
           point: {
             events: {
               click: e => {
-                props.selectEpisode(e.point.season, e.point.episode);
+                props.onSelectEpisode(e.point.season, e.point.episode);
               }
             }
           },
