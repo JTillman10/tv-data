@@ -31,9 +31,11 @@ jobs:
           name: Testing and Coverage
           # command: yarn test
           command: yarn test -- --coverage
-      - store_artifacts:
+      - store_test_results:
           path: coverage
-          destination: coverage
+      # - store_artifacts:
+      #     path: coverage
+      #     destination: coverage
       - run:
           name: Building
           command: yarn build
