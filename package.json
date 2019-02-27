@@ -24,7 +24,7 @@
     "build": "react-scripts build",
     "lint": "eslint src",
     "test": "react-scripts test",
-    "test:ci": "jest",
+    "test:ci": "yarn run test --coverage --reporters=default --reporters=jest-junit",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
