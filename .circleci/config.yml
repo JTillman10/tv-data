@@ -28,14 +28,17 @@ jobs:
       #     name: Lint
       #     command: yarn lint -- --format junit -o reports/junit/js-lint-results.xml
       - run:
-          name: Testing and Coverage
+          name: Testing
           environment:
             JEST_JUNIT_OUTPUT: reports/junit/js-test-results.xml
           command: yarn test:ci
       - store_test_results:
           path: reports/junit
+      - run: Coverage
+          command: yarn test -- --coverage
       - store_artifacts:
-          path: reports/junit
+          path: coverage
+          destination: coverage
       - run:
           name: Building
           command: yarn build
