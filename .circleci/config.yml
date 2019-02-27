@@ -29,11 +29,11 @@ jobs:
       #       command: npm run lint
       - run:
           name: Testing and Coverage
-          command: yarn test
-          # command: yarn test -- --coverage
-      # - store_artifacts:
-      #     path: coverage
-      #     destination: coverage
+          # command: yarn test
+          command: yarn test -- --coverage
+      - store_artifacts:
+          path: coverage
+          destination: coverage
       - run:
           name: Building
           command: yarn build
