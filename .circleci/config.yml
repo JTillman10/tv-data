@@ -33,9 +33,9 @@ jobs:
           command: yarn test -- --coverage
       - store_test_results:
           path: coverage
-      # - store_artifacts:
-      #     path: coverage
-      #     destination: coverage
+      - store_artifacts:
+          path: coverage
+          destination: coverage
       - run:
           name: Building
           command: yarn build
