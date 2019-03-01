@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// import onClickOutside from 'react-onclickoutside';
 
 import './Search.scss';
 
@@ -9,7 +10,7 @@ import {
   highlightItem,
   highlightItemDown,
   highlightItemUp
-} from '../../../store/search/search.actions';
+} from '../../store/search/search.actions';
 
 export class Search extends Component {
   handleKeyDown = event => {
@@ -41,6 +42,10 @@ export class Search extends Component {
     this.props.selected(this.props.highlightedItem);
   };
 
+  handleClickOutside = e => {
+    this.props.resetResults();
+  };
+
   render() {
     let results;
     if (this.props.searchResults.length > 0) {
@@ -70,12 +75,13 @@ export class Search extends Component {
       <div className="field">
         <p className="control has-icons-left">
           <input
-            className="input is-large"
+            className="input"
             type="text"
             placeholder="Search for a show"
             onChange={this.props.searched}
             onKeyDown={this.handleKeyDown}
             // value={this.state.selectedValue}
+            // clear on selection
           />
           <span className="icon is-small is-left">
             <FontAwesomeIcon icon="search" />
@@ -105,3 +111,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Search);
+// )(onClickOutside(Search));
