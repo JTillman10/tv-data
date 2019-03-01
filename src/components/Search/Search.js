@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import onClickOutside from 'react-onclickoutside';
+import onClickOutside from 'react-onclickoutside';
 
 import './Search.scss';
 
@@ -110,5 +110,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Search);
-// )(onClickOutside(Search));
+)(onClickOutside(Search));
