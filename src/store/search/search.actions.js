@@ -13,7 +13,7 @@ const searchSuccess = searchResults => {
   };
 };
 
-const resetSearchResults = () => {
+export const resetSearchResults = () => {
   return {
     type: RESET_RESULTS
   };
