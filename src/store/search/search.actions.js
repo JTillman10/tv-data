@@ -1,6 +1,7 @@
-import { SearchShow } from '../../api/search';
+import { GetPopularShows, SearchShow } from '../../api/search';
 
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
+export const GET_POPULAR_SHOWS = 'GET_POPULAR_SHOWS';
 export const RESET_RESULTS = 'RESET_RESULTS';
 export const HIGHLIGHT_ITEM_DOWN = 'HIGHLIGHT_ITEM_DOWN';
 export const HIGHLIGHT_ITEM_UP = 'HIGHLIGHT_ITEM_UP';
@@ -13,10 +14,24 @@ const searchSuccess = searchResults => {
   };
 };
 
-const resetSearchResults = () => {
+const getPopularShowsSuccess = results => {
+  return {
+    type: GET_POPULAR_SHOWS,
+    results
+  };
+};
+
+export const resetSearchResults = () => {
   return {
     type: RESET_RESULTS
   };
+};
+
+export const getPopularShows = () => {
+  return dispatch =>
+    GetPopularShows().then(response => {
+      dispatch(getPopularShowsSuccess(response.data.results));
+    });
 };
 
 export const search = searchParameter => {

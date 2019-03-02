@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { RatingsChart } from './RatingsChart/RatingsChart';
-import { SeasonList } from './SeasonsList/SeasonList';
+import { RatingsChart } from '../../components/Show/RatingsChart/RatingsChart';
+import { SeasonList } from '../../components/Show/SeasonsList/SeasonList';
 
-import { getEpisodesForSeason, updateSelectedSeason } from '../../../store/show/show.actions';
+import { getEpisodesForSeason, updateSelectedSeason } from '../../store/show/show.actions';
 
 export class Seasons extends Component {
   selectSeasonHandler = event => {
@@ -23,6 +23,16 @@ export class Seasons extends Component {
       this.props.selectedSeason,
       this.props.totalSeasons
     );
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.showId !== nextProps.showId) {
+      this.props.onGetEpisodesForSeason(
+        nextProps.showId,
+        nextProps.selectedSeason,
+        nextProps.totalSeasons
+      );
+    }
   }
 
   render() {

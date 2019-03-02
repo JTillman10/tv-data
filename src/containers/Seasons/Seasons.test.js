@@ -3,8 +3,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { Seasons } from './Seasons';
-import { SeasonList } from './SeasonsList/SeasonList';
-import { RatingsChart } from './RatingsChart/RatingsChart';
+import { SeasonList } from '../../components/Show/SeasonsList/SeasonList';
+import { RatingsChart } from '../../components/Show/RatingsChart/RatingsChart';
 
 describe('<Seasons />', () => {
   let wrapper;

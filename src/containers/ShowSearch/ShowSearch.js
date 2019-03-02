@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import Search from '../../components/UI/Search/Search';
+import Search from '../../components/Search/Search';
+import './ShowSearch.scss';
 
-import { search } from '../../store/search/search.actions';
+import { search, resetSearchResults } from '../../store/search/search.actions';
 
 export class ShowSearch extends Component {
   componentDidMount() {
@@ -18,22 +19,28 @@ export class ShowSearch extends Component {
 
   onSelectedHandler = selectedItemIndex => {
     const selectedShowId = this.props.searchResults[selectedItemIndex].id;
+    this.props.onResetSearchResults();
     this.props.history.push(`/shows/${selectedShowId}`);
+  };
+
+  onResetResults = e => {
+    this.props.onResetSearchResults();
   };
 
   render() {
     return (
-      <section className="section">
-        <div className="container">
-          <form>
-            <Search
-              searched={this.onSearchedHandler}
-              selected={this.onSelectedHandler}
-              searchResults={this.props.searchResults}
-            />
-          </form>
-        </div>
-      </section>
+      // <section className="section">
+      <div className="container ShowSearch">
+        <form>
+          <Search
+            searched={this.onSearchedHandler}
+            selected={this.onSelectedHandler}
+            resetResults={this.onResetResults}
+            searchResults={this.props.searchResults}
+          />
+        </form>
+      </div>
+      // </section>
     );
   }
 }
@@ -46,7 +53,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSearch: searchParameter => dispatch(search(searchParameter))
+    onSearch: searchParameter => dispatch(search(searchParameter)),
+    onResetSearchResults: () => dispatch(resetSearchResults())
   };
 };
 

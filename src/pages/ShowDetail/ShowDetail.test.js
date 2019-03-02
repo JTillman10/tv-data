@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import { ShowDetail } from './ShowDetail';
 import { Overview } from '../../components/Show/Overview/Overview';
-import Seasons from '../../components/Show/Seasons/Seasons';
+import Seasons from '../../containers/Seasons/Seasons';
 import { Episode } from '../../components/Show/Episode/Episode';
 
 describe('<ShowDetail />', () => {

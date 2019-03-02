@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { APIKEY, BASEURL } from './constants';
+import { APIKEY, BASEURL, BASEIMAGEURL } from './constants';
 
 export const GetShow = showId => {
   return axios.get(`${BASEURL}/tv/${showId}`, { params: { api_key: APIKEY } });
@@ -34,4 +34,8 @@ export const GetEpisode = (showId, seasonNumber, episodeNumber) => {
   return axios.get(`${BASEURL}/tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}`, {
     params: { api_key: APIKEY }
   });
+};
+
+export const GetImageUrl = imageUrl => {
+  return `${BASEIMAGEURL}/w200/${imageUrl}`;
 };

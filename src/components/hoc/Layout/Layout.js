@@ -1,5 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Navbar } from '../../UI/Navbar/Navbar';
 
 export const Layout = props => {
-  return <section className="hero is-fullheight">{props.children}</section>;
+  return (
+    <Fragment>
+      <Navbar />
+      <section className="hero is-fullheight">{props.children}</section>
+    </Fragment>
+  );
 };

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import './ShowDetail.scss';
 
 import { Overview } from '../../components/Show/Overview/Overview';
-import Seasons from '../../components/Show/Seasons/Seasons';
+import Seasons from '../../containers/Seasons/Seasons';
 import { Episode } from '../../components/Show/Episode/Episode';
 
 import { getShow, getEpisode } from '../../store/show/show.actions';
@@ -13,6 +13,12 @@ import { getShow, getEpisode } from '../../store/show/show.actions';
 export class ShowDetail extends Component {
   componentDidMount() {
     this.props.onGetShow(this.props.match.params.showId);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.match.params.showId !== nextProps.match.params.showId) {
+      this.props.onGetShow(nextProps.match.params.showId);
+    }
   }
 
   episodeSelectedHandler = (seasonNumber, episodeNumber) => {
