@@ -3,15 +3,18 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { ShowSearch } from './ShowSearch';
-import Search from '../../components/UI/Search/Search';
+import Search from '../../components/Search/Search';
 
 describe('<ShowSearch />', () => {
   let wrapper;
 
   const onSearchFunction = jest.fn();
+  const onResetSearchResultsFunction = jest.fn();
 
   it('renders', () => {
-    wrapper = shallow(<ShowSearch onSearch={onSearchFunction} />);
+    wrapper = shallow(
+      <ShowSearch onSearch={onSearchFunction} onResetSearchResults={onResetSearchResultsFunction} />
+    );
     expect(wrapper.exists()).toBe(true);
   });
 
@@ -43,10 +46,25 @@ describe('<ShowSearch />', () => {
       expect(onSearchFunction).toHaveBeenCalledWith(event.target.value);
     });
 
-    it('selected calls history.push with correct showId', () => {
+    it('resetResults calls onResetSearchResults', () => {
+      search.prop('resetResults')();
+      expect(onResetSearchResultsFunction).toHaveBeenCalled();
+    });
+
+    describe('selected', () => {
       const index = 1;
-      search.prop('selected')(index);
-      expect(pushFunction).toHaveBeenCalledWith(`/shows/${searchResults[index].id}`);
+
+      beforeEach(() => {
+        search.prop('selected')(index);
+      });
+
+      it('calls history.push with correct showId', () => {
+        expect(pushFunction).toHaveBeenCalledWith(`/shows/${searchResults[index].id}`);
+      });
+
+      it('calls onResetSearchResults', () => {
+        expect(onResetSearchResultsFunction).toHaveBeenCalled();
+      });
     });
   });
 });
