@@ -9,7 +9,7 @@ export const ShowCard = props => {
     <Link to={detailLink}>
       <div className="card">
         <div className="card-image">
-          <figure className="image is-2by3">
+          <figure className="image">
             <img src={GetImageUrl(props.imageUrl)} alt={props.showName} />
           </figure>
         </div>

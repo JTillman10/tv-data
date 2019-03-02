@@ -4,14 +4,16 @@ import {
   RESET_RESULTS,
   HIGHLIGHT_ITEM,
   HIGHLIGHT_ITEM_DOWN,
-  HIGHLIGHT_ITEM_UP
+  HIGHLIGHT_ITEM_UP,
+  GET_POPULAR_SHOWS
 } from './search.actions';
 
 describe('SearchReducer', () => {
   let reducer;
   const initialState = {
     searchResults: [],
-    highlightedItem: null
+    highlightedItem: null,
+    dashboardItems: []
   };
 
   beforeEach(() => {
@@ -32,19 +34,32 @@ describe('SearchReducer', () => {
     const result = reducer(initialState, { type: SEARCH_SUCCESS, searchResults });
     expect(result).toEqual({
       searchResults,
-      highlightedItem: null
+      highlightedItem: null,
+      dashboardItems: []
+    });
+  });
+
+  it('should handle GET_POPULAR_SHOWS', () => {
+    const dashboardItems = 'dashboardItems';
+    const result = reducer(initialState, { type: GET_POPULAR_SHOWS, results: dashboardItems });
+    expect(result).toEqual({
+      searchResults: [],
+      highlightedItem: null,
+      dashboardItems
     });
   });
 
   it('should handle RESET_RESULTS', () => {
     const state = {
       searchResults: 'searchResults',
-      highlightedItem: null
+      highlightedItem: null,
+      dashboardItems: []
     };
     const result = reducer(state, { type: RESET_RESULTS });
     expect(result).toEqual({
       searchResults: [],
-      highlightedItem: null
+      highlightedItem: null,
+      dashboardItems: []
     });
   });
 
@@ -53,21 +68,24 @@ describe('SearchReducer', () => {
     const result = reducer(initialState, { type: HIGHLIGHT_ITEM, highlightedItem });
     expect(result).toEqual({
       searchResults: [],
-      highlightedItem
+      highlightedItem,
+      dashboardItems: []
     });
   });
 
   describe('HIGHLIGHT_ITEM_DOWN', () => {
     const state = {
       searchResults: new Array(5),
-      highlightedItem: null
+      highlightedItem: null,
+      dashboardItems: []
     };
 
     it('should handle when highlightedItem is null', () => {
       const result = reducer(state, { type: HIGHLIGHT_ITEM_DOWN });
       expect(result).toEqual({
         searchResults: new Array(5),
-        highlightedItem: 0
+        highlightedItem: 0,
+        dashboardItems: []
       });
     });
 
@@ -76,7 +94,8 @@ describe('SearchReducer', () => {
       const result = reducer(state, { type: HIGHLIGHT_ITEM_DOWN });
       expect(result).toEqual({
         searchResults: new Array(5),
-        highlightedItem: 0
+        highlightedItem: 0,
+        dashboardItems: []
       });
     });
 
@@ -85,7 +104,8 @@ describe('SearchReducer', () => {
       const result = reducer(state, { type: HIGHLIGHT_ITEM_DOWN });
       expect(result).toEqual({
         searchResults: new Array(5),
-        highlightedItem: 4
+        highlightedItem: 4,
+        dashboardItems: []
       });
     });
   });
@@ -93,14 +113,16 @@ describe('SearchReducer', () => {
   describe('HIGHLIGHT_ITEM_UP', () => {
     const state = {
       searchResults: new Array(5),
-      highlightedItem: null
+      highlightedItem: null,
+      dashboardItems: []
     };
 
     it('should handle when highlightedItem is null', () => {
       const result = reducer(state, { type: HIGHLIGHT_ITEM_UP });
       expect(result).toEqual({
         searchResults: new Array(5),
-        highlightedItem: 4
+        highlightedItem: 4,
+        dashboardItems: []
       });
     });
 
@@ -108,7 +130,8 @@ describe('SearchReducer', () => {
       const result = reducer(state, { type: HIGHLIGHT_ITEM_UP });
       expect(result).toEqual({
         searchResults: new Array(5),
-        highlightedItem: 4
+        highlightedItem: 4,
+        dashboardItems: []
       });
     });
 
@@ -117,7 +140,8 @@ describe('SearchReducer', () => {
       const result = reducer(state, { type: HIGHLIGHT_ITEM_UP });
       expect(result).toEqual({
         searchResults: new Array(5),
-        highlightedItem: 2
+        highlightedItem: 2,
+        dashboardItems: []
       });
     });
   });

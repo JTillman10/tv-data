@@ -12,10 +12,6 @@ export class Dashboard extends Component {
   }
 
   render() {
-    if (this.props.dashboardItems) {
-      console.log(this.props.dashboardItems);
-    }
-
     return (
       <section className="section">
         <div className="container">

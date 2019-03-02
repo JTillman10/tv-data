@@ -12,7 +12,10 @@ import {
   RESET_RESULTS,
   HIGHLIGHT_ITEM_DOWN,
   HIGHLIGHT_ITEM_UP,
-  HIGHLIGHT_ITEM
+  HIGHLIGHT_ITEM,
+  resetSearchResults,
+  GET_POPULAR_SHOWS,
+  getPopularShows
 } from './search.actions';
 
 const middlewares = [thunk];
@@ -51,6 +54,39 @@ describe('SearchActions', () => {
       const expectedActions = [{ type: RESET_RESULTS }];
       store.dispatch(search(searchParameter));
       expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  describe('resetSearchResults', () => {
+    it('returns type RESET_RESULTs', () => {
+      const result = resetSearchResults();
+      expect(result.type).toBe(RESET_RESULTS);
+    });
+  });
+
+  describe('getPopularShows', () => {
+    let store;
+
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    it('should create GET_POPULAR_SHOWS when searchParameter has length greater than 3', async done => {
+      moxios.install();
+
+      const results = 'results';
+      moxios.stubRequest(`${BASEURL}/tv/popular?api_key=${APIKEY}`, {
+        status: 200,
+        response: { results }
+      });
+
+      const expectedActions = [{ type: GET_POPULAR_SHOWS, results }];
+      await store.dispatch(getPopularShows()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+
+      moxios.uninstall();
+      done();
     });
   });
 

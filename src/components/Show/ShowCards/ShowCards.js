@@ -9,7 +9,7 @@ export const ShowCards = props => {
     cardColumns = props.shows.map(show => {
       return (
         <div className="column is-one-quarter" key={show.id}>
-          <ShowCard showName={show.original_name} imageUrl={show.poster_path} showId={show.id} />
+          <ShowCard showId={show.id} showName={show.original_name} imageUrl={show.poster_path} />
         </div>
       );
     });
