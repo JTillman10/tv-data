@@ -10,7 +10,7 @@ import {
 const initialState = {
   searchResults: [],
   highlightedItem: null,
-  dashboardItems: null
+  dashboardItems: []
 };
 
 const searchSuccess = (state, action) => {

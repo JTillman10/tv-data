@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { ShowCards } from '../../components/Show/ShowCards/ShowCards';
+
 import { getPopularShows } from '../../store/search/search.actions';
 
 export class Dashboard extends Component {
@@ -14,7 +16,13 @@ export class Dashboard extends Component {
       console.log(this.props.dashboardItems);
     }
 
-    return <section className="section">Dashboard</section>;
+    return (
+      <section className="section">
+        <div className="container">
+          <ShowCards shows={this.props.dashboardItems} />
+        </div>
+      </section>
+    );
   }
 }
 
