@@ -30,7 +30,7 @@ export class ShowSearch extends Component {
   render() {
     return (
       // <section className="section">
-      <div className="container ShowSearch">
+      <div className="ShowSearch">
         <form>
           <Search
             searched={this.onSearchedHandler}

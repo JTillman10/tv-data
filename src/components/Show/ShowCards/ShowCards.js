@@ -8,7 +8,10 @@ export const ShowCards = props => {
   if (props.shows.length > 0) {
     cardColumns = props.shows.map(show => {
       return (
-        <div className="column is-one-quarter" key={show.id}>
+        <div
+          className="column is-one-fifth-widescreen is-one-quarter-desktop is-one-third-tablet is-half-mobile"
+          key={show.id}
+        >
           <ShowCard showId={show.id} showName={show.original_name} imageUrl={show.poster_path} />
         </div>
       );
