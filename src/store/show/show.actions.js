@@ -4,6 +4,7 @@ export const GET_SHOW = 'GET_SHOW';
 export const GET_EPISODE = 'GET_EPISODE';
 export const GET_EPISODES_FOR_SEASON = 'GET_EPISODES_FOR_SEASON';
 export const UPDATE_SELECTED_SEASON = 'UPDATE_SELECTED_SEASON';
+export const SELECT_EPISODE = 'SELECT_EPISODE';
 
 const getShowSuccess = showInfo => {
   return {
@@ -34,11 +35,19 @@ export const getShow = showId => {
   };
 };
 
-export const getEpisode = (showId, seasonNumber, episodeNumber) => {
-  return dispatch => {
-    return GetEpisode(showId, seasonNumber, episodeNumber).then(response => {
-      dispatch(getEpisodeSuccess(response.data));
-    });
+// export const getEpisode = (showId, seasonNumber, episodeNumber) => {
+//   return dispatch => {
+//     return GetEpisode(showId, seasonNumber, episodeNumber).then(response => {
+//       dispatch(getEpisodeSuccess(response.data));
+//     });
+//   };
+// };
+
+export const selectEpisode = (seasonNumber, episodeNumber) => {
+  return {
+    type: SELECT_EPISODE,
+    seasonNumber: seasonNumber,
+    episodeNumber: episodeNumber
   };
 };
 

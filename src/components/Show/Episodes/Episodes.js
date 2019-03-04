@@ -7,8 +7,15 @@ export const Episodes = props => {
 
   if (props.episodes) {
     const episodeList = props.episodes.map(episode => {
+      const isSelected =
+        episode.season_number === props.selectedEpisode.season &&
+        episode.episode_number === props.selectedEpisode.episode;
       return (
-        <tr key={episode.id}>
+        <tr
+          id={`s${episode.season_number}e${episode.episode_number}`}
+          key={episode.id}
+          className={isSelected ? 'is-selected' : ''}
+        >
           <td>
             <Episode episode={episode} />
           </td>

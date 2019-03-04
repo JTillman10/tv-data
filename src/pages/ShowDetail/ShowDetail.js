@@ -11,9 +11,9 @@ import { Episodes } from '../../components/Show/Episodes/Episodes';
 
 import {
   getShow,
-  getEpisode,
   updateSelectedSeason,
-  getEpisodesForSeason
+  getEpisodesForSeason,
+  selectEpisode
 } from '../../store/show/show.actions';
 
 export class ShowDetail extends Component {
@@ -29,7 +29,9 @@ export class ShowDetail extends Component {
   }
 
   episodeSelectedHandler = (seasonNumber, episodeNumber) => {
-    // this.props.onGetEpisode(this.props.match.params.showId, seasonNumber, episodeNumber);
+    this.props.onEpisodeSelected(seasonNumber, episodeNumber);
+    const element = document.getElementById(`s${seasonNumber}e${episodeNumber}`);
+    element.scrollIntoView();
   };
 
   seasonSelectedHandler = event => {
@@ -75,7 +77,13 @@ export class ShowDetail extends Component {
             </div>
           </div>
           <div className="container">
-            <Episodes episodes={this.props.episodes} />
+            <Episodes
+              episodes={this.props.episodes}
+              selectedEpisode={{
+                season: this.props.selectedEpisodeSeasonNumber,
+                episode: this.props.selectedEpisodeNumber
+              }}
+            />
           </div>
         </div>
       );
@@ -90,7 +98,9 @@ const mapStateToProps = state => {
     showInfo: state.show.showInfo,
     // selectedEpisode: state.show,
     selectedSeason: state.show.selectedSeason,
-    episodes: state.show.episodes
+    episodes: state.show.episodes,
+    selectedEpisodeSeasonNumber: state.show.selectedEpisodeSeasonNumber,
+    selectedEpisodeNumber: state.show.selectedEpisodeNumber
   };
 };
 
@@ -99,7 +109,9 @@ const mapDispatchToProps = dispatch => {
     onGetShow: showId => dispatch(getShow(showId)),
     onGetEpisodesForSeason: (showId, newSeasonNumber, totalSeasons) =>
       dispatch(getEpisodesForSeason(showId, newSeasonNumber, totalSeasons)),
-    onUpdateSelectedSeason: newSeasonNumber => dispatch(updateSelectedSeason(newSeasonNumber))
+    onUpdateSelectedSeason: newSeasonNumber => dispatch(updateSelectedSeason(newSeasonNumber)),
+    onEpisodeSelected: (seasonNumber, episodeNumber) =>
+      dispatch(selectEpisode(seasonNumber, episodeNumber))
     // onGetEpisode: (showId, seasonNumber, episodeNumber) =>
     //   dispatch(getEpisode(showId, seasonNumber, episodeNumber))
   };
