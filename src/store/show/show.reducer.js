@@ -1,6 +1,5 @@
 import {
   GET_SHOW,
-  GET_EPISODE,
   GET_EPISODES_FOR_SEASON,
   UPDATE_SELECTED_SEASON,
   SELECT_EPISODE
@@ -18,13 +17,6 @@ const getShow = (state, action) => {
   return {
     ...state,
     showInfo: action.showInfo
-  };
-};
-
-const getEpisode = (state, action) => {
-  return {
-    ...state,
-    selectedEpisode: action.selectedEpisode
   };
 };
 
@@ -54,8 +46,6 @@ export const ShowReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_SHOW:
       return getShow(state, action);
-    case GET_EPISODE:
-      return getEpisode(state, action);
     case GET_EPISODES_FOR_SEASON:
       return getEpisodesForSeason(state, action);
     case UPDATE_SELECTED_SEASON:

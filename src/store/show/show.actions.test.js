@@ -49,30 +49,6 @@ describe('ShowActions', () => {
     });
   });
 
-  describe('getEpisode', () => {
-    it('should create GET_EPISODE', async done => {
-      const showId = 1;
-      const seasonNumber = 1;
-      const episodeNumber = 1;
-      const selectedEpisode = 'selectedEpisode';
-      moxios.stubRequest(
-        `${BASEURL}/tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${APIKEY}`,
-        {
-          status: 200,
-          response: selectedEpisode
-        }
-      );
-
-      const expectedActions = [{ type: GET_EPISODE, selectedEpisode }];
-      await store.dispatch(getEpisode(showId, seasonNumber, episodeNumber)).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-      });
-
-      moxios.uninstall();
-      done();
-    });
-  });
-
   describe('getEpisodesForSeason', () => {
     const showId = 1;
     const seasonNumber = 1;

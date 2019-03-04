@@ -12,7 +12,8 @@ describe('ShowReducer', () => {
     showInfo: null,
     selectedSeason: 1,
     episodes: null,
-    selectedEpisode: null
+    selectedEpisodeNumber: null,
+    selectedEpisodeSeasonNumber: null
   };
 
   beforeEach(() => {
@@ -35,18 +36,8 @@ describe('ShowReducer', () => {
       showInfo,
       selectedSeason: 1,
       episodes: null,
-      selectedEpisode: null
-    });
-  });
-
-  it('should handle GET_EPISODE', () => {
-    const selectedEpisode = 'selectedEpisode';
-    const result = reducer(initialState, { type: GET_EPISODE, selectedEpisode });
-    expect(result).toEqual({
-      showInfo: null,
-      selectedSeason: 1,
-      episodes: null,
-      selectedEpisode
+      selectedEpisodeNumber: null,
+      selectedEpisodeSeasonNumber: null
     });
   });
 
@@ -57,7 +48,8 @@ describe('ShowReducer', () => {
       showInfo: null,
       selectedSeason: 1,
       episodes,
-      selectedEpisode: null
+      selectedEpisodeNumber: null,
+      selectedEpisodeSeasonNumber: null
     });
   });
 
@@ -68,7 +60,8 @@ describe('ShowReducer', () => {
       showInfo: null,
       selectedSeason,
       episodes: null,
-      selectedEpisode: null
+      selectedEpisodeNumber: null,
+      selectedEpisodeSeasonNumber: null
     });
   });
 });

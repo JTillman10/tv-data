@@ -4,8 +4,7 @@ import { shallow } from 'enzyme';
 
 import { ShowDetail } from './ShowDetail';
 import { Overview } from '../../components/Show/Overview/Overview';
-import Seasons from '../../containers/Seasons/Seasons';
-import { Episode } from '../../components/Show/Episode/Episode';
+import { Episodes } from '../../components/Show/Episodes/Episodes';
 
 describe('<ShowDetail />', () => {
   let wrapper;
@@ -24,10 +23,16 @@ describe('<ShowDetail />', () => {
   };
 
   const onGetShowFunction = jest.fn();
+  const onGetEpisodesForSeasonFunction = jest.fn();
 
   it('renders', () => {
     wrapper = shallow(
-      <ShowDetail onGetShow={onGetShowFunction} match={match} showInfo={showInfo} />
+      <ShowDetail
+        onGetShow={onGetShowFunction}
+        onGetEpisodesForSeason={onGetEpisodesForSeasonFunction}
+        match={match}
+        showInfo={showInfo}
+      />
     );
     expect(wrapper.exists()).toBe(true);
   });
@@ -60,48 +65,21 @@ describe('<ShowDetail />', () => {
     });
   });
 
-  describe('Seasons', () => {
-    let seasons;
-    const onGetEpisodeFunction = jest.fn();
-
-    beforeEach(() => {
-      wrapper.setProps({ onGetEpisode: onGetEpisodeFunction });
-      seasons = wrapper.find(Seasons).first();
-    });
-
-    it('renders', () => {
-      expect(seasons.exists()).toBe(true);
-    });
-
-    it('has correct showId', () => {
-      expect(seasons.prop('showId')).toBe(match.params.showId);
-    });
-
-    it('has correct totalSeasons', () => {
-      expect(seasons.prop('totalSeasons')).toBe(showInfo.number_of_seasons);
-    });
-
-    it('selectEpisode should call onGetEpisode', () => {
-      seasons.prop('selectEpisode')();
-      expect(onGetEpisodeFunction).toHaveBeenCalled();
-    });
-  });
-
-  describe('Episode', () => {
+  describe('Episodes', () => {
     let episode;
-    const selectedEpisode = 'Episode';
+    // const selectedEpisode = 'Episode';
 
     beforeEach(() => {
-      wrapper.setProps({ selectedEpisode });
-      episode = wrapper.find(Episode).first();
+      // wrapper.setProps({ selectedEpisode });
+      episode = wrapper.find(Episodes).first();
     });
 
     it('renders', () => {
       expect(episode.exists()).toBe(true);
     });
 
-    it('has correct episode', () => {
-      expect(episode.prop('episode')).toBe(selectedEpisode);
-    });
+    // it('has correct episode', () => {
+    //   expect(episode.prop('episode')).toBe(selectedEpisode);
+    // });
   });
 });
