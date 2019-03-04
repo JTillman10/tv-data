@@ -12,7 +12,7 @@ export const Navbar = props => {
             DASHBOARD
           </NavLink>
         </div>
-        <div className="navbar-menu is-active">
+        <div className="navbar-menu">
           <div className="navbar-end">
             <div className="navbar-item is-expanded">
               <ShowSearch />
