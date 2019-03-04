@@ -6,7 +6,7 @@ import './ShowDetail.scss';
 
 import { Overview } from '../../components/Show/Overview/Overview';
 import Seasons from '../../containers/Seasons/Seasons';
-import { Episode } from '../../components/Show/Episode/Episode';
+import { Episodes } from '../../components/Show/Episodes/Episodes';
 
 import { getShow, getEpisode } from '../../store/show/show.actions';
 
@@ -51,7 +51,7 @@ export class ShowDetail extends Component {
             </div>
           </div>
           <div className="container">
-            <Episode episode={this.props.selectedEpisode} />
+            <Episodes episode={this.props.selectedEpisode} />
           </div>
         </div>
       );

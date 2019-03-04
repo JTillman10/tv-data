@@ -2,9 +2,9 @@ import React from 'react';
 
 import { shallow } from 'enzyme';
 
-import { Episode } from './Episode';
+import { Episode } from './Episodes';
 
-describe('<Episode />', () => {
+describe('<Episodes />', () => {
   let wrapper;
   let box;
 

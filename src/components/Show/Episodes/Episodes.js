@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Episode = props => {
+export const Episodes = props => {
   const formatDate = date => {
     let [year, month, day] = date.split('-');
     month = month[0] === '0' ? month[1] : month;
