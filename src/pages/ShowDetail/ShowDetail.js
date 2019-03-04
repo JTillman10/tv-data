@@ -29,7 +29,7 @@ export class ShowDetail extends Component {
   }
 
   episodeSelectedHandler = (seasonNumber, episodeNumber) => {
-    this.props.onGetEpisode(this.props.match.params.showId, seasonNumber, episodeNumber);
+    // this.props.onGetEpisode(this.props.match.params.showId, seasonNumber, episodeNumber);
   };
 
   seasonSelectedHandler = event => {
@@ -75,7 +75,7 @@ export class ShowDetail extends Component {
             </div>
           </div>
           <div className="container">
-            <Episodes episode={this.props.selectedEpisode} />
+            <Episodes episodes={this.props.episodes} />
           </div>
         </div>
       );
