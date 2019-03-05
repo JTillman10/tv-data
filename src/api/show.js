@@ -39,3 +39,12 @@ export const GetEpisode = (showId, seasonNumber, episodeNumber) => {
 export const GetImageUrl = imageUrl => {
   return `${BASEIMAGEURL}/w200/${imageUrl}`;
 };
+
+export const GetEpisodeStillUrls = (showId, seasonNumber, episodeNumber) => {
+  return axios.get(
+    `${BASEURL}/tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}/images`,
+    {
+      params: { api_key: APIKEY }
+    }
+  );
+};

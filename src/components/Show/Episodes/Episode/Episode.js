@@ -1,13 +1,28 @@
 import React, { Component } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { GetEpisodeStillUrls, GetImageUrl } from '../../../../api/show';
 
 const OVERVIEW_LENGTH = 175;
 
 export class Episode extends Component {
   state = {
-    showAll: false
+    showAll: false,
+    stillPath: null
   };
+
+  componentDidMount() {
+    GetEpisodeStillUrls(
+      this.props.episode.show_id,
+      this.props.episode.season_number,
+      this.props.episode.episode_number
+    ).then(response => {
+      const stillIndex = Math.floor(Math.random() * response.data.stills.length);
+      const stillPath = response.data.stills[stillIndex].file_path;
+
+      this.setState({ stillPath });
+    });
+  }
 
   formatDate = date => {
     let [year, month, day] = date.split('-');
@@ -15,8 +30,11 @@ export class Episode extends Component {
     return `${month}/${day}/${year}`;
   };
 
-  formatOverview = overview => {
-    const periodIndex = overview.indexOf('.', OVERVIEW_LENGTH);
+  getPeriodIndex = overview => {
+    return overview.indexOf('.', OVERVIEW_LENGTH);
+  };
+
+  formatOverview = (overview, periodIndex) => {
     const sliceIndex = periodIndex > 0 ? periodIndex + 1 : OVERVIEW_LENGTH;
 
     return overview.length > OVERVIEW_LENGTH && !this.state.showAll
@@ -35,32 +53,45 @@ export class Episode extends Component {
 
   render() {
     const date = this.formatDate(this.props.episode.air_date);
-    const overview = this.formatOverview(this.props.episode.overview);
+
+    const periodIndex = this.getPeriodIndex(this.props.episode.overview);
+    const overview = this.formatOverview(this.props.episode.overview, periodIndex);
 
     let caret;
-    if (this.props.episode.overview.length > OVERVIEW_LENGTH) {
+    if (
+      this.props.episode.overview.length > OVERVIEW_LENGTH &&
+      periodIndex + 1 !== this.props.episode.overview.length
+    ) {
       caret = (
-        <button className="button is-pulled-right" onClick={() => this.toggleShowAll()}>
+        <button className="button" onClick={() => this.toggleShowAll()}>
           <span className="icon">
-            <FontAwesomeIcon icon={this.state.showAll ? 'caret-down' : 'caret-up'} />
+            <FontAwesomeIcon icon={this.state.showAll ? 'caret-up' : 'caret-down'} />
           </span>
         </button>
       );
     }
 
+    let still;
+    if (this.state.stillPath) {
+      still = (
+        <figure className="image">
+          <img src={GetImageUrl(this.state.stillPath)} alt={this.props.episode.name} />
+        </figure>
+      );
+    }
+
     return (
-      <div className="columns">
-        <div className="column is-2">
-          <h1 className="title is-uppercase is-4">
-            S{this.props.episode.season_number}E{this.props.episode.episode_number}
-          </h1>
+      <div className="columns is-vcentered">
+        <div className="column is-1">
+          S{this.props.episode.season_number}E{this.props.episode.episode_number}
         </div>
+        <div className="column is-2">{still}</div>
         <div className="column is-7">
           <h1 className="title is-uppercase is-4">{this.props.episode.name}</h1>
           <div className="subtitle is-6">{overview}</div>
         </div>
-        <div className="column is-1">{caret}</div>
         <div className="column is-2">
+          {caret}
           <h1 className="title is-5 has-text-grey is-pulled-right">{date}</h1>
         </div>
       </div>

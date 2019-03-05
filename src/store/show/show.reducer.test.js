@@ -78,7 +78,7 @@ describe('ShowReducer', () => {
       selectedSeason: 1,
       episodes: null,
       selectedEpisodeNumber: episodeNumber,
-      selectedEpisodeSeasonNumber: seasonNumberw
+      selectedEpisodeSeasonNumber: seasonNumber
     });
   });
 });

@@ -25,6 +25,7 @@ export class ShowDetail extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.match.params.showId !== nextProps.match.params.showId) {
       this.props.onGetShow(nextProps.match.params.showId);
+      this.props.onGetEpisodesForSeason(nextProps.match.params.showId, 1);
     }
   }
 

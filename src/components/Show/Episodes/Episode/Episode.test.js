@@ -64,16 +64,16 @@ describe('<Episodes />', () => {
         expect(caret.exists()).toBe(true);
       });
 
-      it('should add the caret-up icon if showAll is false', () => {
+      it('should add the caret-down icon if showAll is false', () => {
         wrapper.setState({ showAll: false });
         const caret = wrapper.find(FontAwesomeIcon).first();
-        expect(caret.prop('icon')).toBe('caret-up');
+        expect(caret.prop('icon')).toBe('caret-down');
       });
 
-      it('should add the caret-down icon if showAll is false', () => {
+      it('should add the caret-up icon if showAll is false', () => {
         wrapper.setState({ showAll: true });
         const caret = wrapper.find(FontAwesomeIcon).first();
-        expect(caret.prop('icon')).toBe('caret-down');
+        expect(caret.prop('icon')).toBe('caret-up');
       });
 
       it('button should flip showAll when clicked', () => {
