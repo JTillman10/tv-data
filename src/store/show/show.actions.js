@@ -1,4 +1,4 @@
-import { GetAllSeasons, GetEpisode, GetSeason, GetShow } from '../../api/show';
+import { GetAllSeasons, GetSeason, GetShow } from '../../api/show';
 
 export const GET_SHOW = 'GET_SHOW';
 export const GET_EPISODES_FOR_SEASON = 'GET_EPISODES_FOR_SEASON';
@@ -9,13 +9,6 @@ const getShowSuccess = showInfo => {
   return {
     type: GET_SHOW,
     showInfo
-  };
-};
-
-const getEpisodeSuccess = selectedEpisode => {
-  return {
-    type: GET_EPISODE,
-    selectedEpisode
   };
 };
 

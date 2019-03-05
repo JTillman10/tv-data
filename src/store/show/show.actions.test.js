@@ -6,13 +6,13 @@ import { APIKEY, BASEURL } from '../../api/constants';
 
 import {
   GET_SHOW,
-  GET_EPISODE,
   GET_EPISODES_FOR_SEASON,
   UPDATE_SELECTED_SEASON,
   getShow,
-  getEpisode,
   getEpisodesForSeason,
-  updateSelectedSeason
+  updateSelectedSeason,
+  SELECT_EPISODE,
+  selectEpisode
 } from './show.actions';
 
 const middlewares = [thunk];
@@ -46,6 +46,17 @@ describe('ShowActions', () => {
 
       moxios.uninstall();
       done();
+    });
+  });
+
+  describe('selectEpisode', () => {
+    it('should create SELECT_EPISODE', () => {
+      const seasonNumber = 1;
+      const episodeNumber = 1;
+      const expectedAction = { type: SELECT_EPISODE, seasonNumber, episodeNumber };
+
+      const result = selectEpisode(seasonNumber, episodeNumber);
+      expect(result).toEqual(expectedAction);
     });
   });
 

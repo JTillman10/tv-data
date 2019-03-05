@@ -32,17 +32,3 @@ export const Episodes = props => {
 
   return episodes;
 };
-
-/* return (
-        // <div className="box">
-        //   <h1 className="title is-uppercase is-4">
-        //     S{props.episode.season_number}E{props.episode.episode_number} - {props.episode.name}
-        //   </h1>
-        //   <div className="subtitle is-6 has-text-grey-light">
-        //     {formatDate(props.episode.air_date)}
-        //   </div>
-        //   <div className="subtitle is-6 has-text-grey">{props.episode.overview}</div>
-        // </div>
-        
-  
-      ); */

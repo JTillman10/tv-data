@@ -16,8 +16,11 @@ export class Episode extends Component {
   };
 
   formatOverview = overview => {
+    const periodIndex = overview.indexOf('.', OVERVIEW_LENGTH);
+    const sliceIndex = periodIndex > 0 ? periodIndex + 1 : OVERVIEW_LENGTH;
+
     return overview.length > OVERVIEW_LENGTH && !this.state.showAll
-      ? overview.slice(0, overview.indexOf('.', OVERVIEW_LENGTH) + 1)
+      ? overview.slice(0, sliceIndex)
       : overview;
   };
 

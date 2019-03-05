@@ -31,11 +31,12 @@ export class ShowDetail extends Component {
   episodeSelectedHandler = (seasonNumber, episodeNumber) => {
     this.props.onEpisodeSelected(seasonNumber, episodeNumber);
     const element = document.getElementById(`s${seasonNumber}e${episodeNumber}`);
-    element.scrollIntoView();
+    if (element) {
+      element.scrollIntoView();
+    }
   };
 
   seasonSelectedHandler = event => {
-    // TODO: add reset episode action
     const newSeasonNumber = event.target.value;
     event.preventDefault();
 

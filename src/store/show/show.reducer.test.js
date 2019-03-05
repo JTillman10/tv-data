@@ -1,9 +1,9 @@
 import { ShowReducer } from './show.reducer';
 import {
   GET_SHOW,
-  GET_EPISODE,
   GET_EPISODES_FOR_SEASON,
-  UPDATE_SELECTED_SEASON
+  UPDATE_SELECTED_SEASON,
+  SELECT_EPISODE
 } from './show.actions';
 
 describe('ShowReducer', () => {
@@ -62,6 +62,23 @@ describe('ShowReducer', () => {
       episodes: null,
       selectedEpisodeNumber: null,
       selectedEpisodeSeasonNumber: null
+    });
+  });
+
+  it('should handle SELECT_EPISODE', () => {
+    const seasonNumber = 'selectedSeason';
+    const episodeNumber = 'selectedEpisode';
+    const result = reducer(initialState, {
+      type: SELECT_EPISODE,
+      seasonNumber,
+      episodeNumber
+    });
+    expect(result).toEqual({
+      showInfo: null,
+      selectedSeason: 1,
+      episodes: null,
+      selectedEpisodeNumber: episodeNumber,
+      selectedEpisodeSeasonNumber: seasonNumberw
     });
   });
 });
