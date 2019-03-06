@@ -1,6 +1,6 @@
 import {
   SEARCH_SUCCESS,
-  GET_POPULAR_SHOWS,
+  FILTER_DASHBOARD,
   RESET_RESULTS,
   HIGHLIGHT_ITEM,
   HIGHLIGHT_ITEM_DOWN,
@@ -10,6 +10,7 @@ import {
 const initialState = {
   searchResults: [],
   highlightedItem: null,
+  dashboardFilter: 'popular',
   dashboardItems: []
 };
 
@@ -20,9 +21,10 @@ const searchSuccess = (state, action) => {
   };
 };
 
-const getPopularShowsSuccess = (state, action) => {
+const filterDashboard = (state, action) => {
   return {
     ...state,
+    dashboardFilter: action.filterType,
     dashboardItems: action.results
   };
 };
@@ -79,8 +81,8 @@ export const SearchReducer = (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_SUCCESS:
       return searchSuccess(state, action);
-    case GET_POPULAR_SHOWS:
-      return getPopularShowsSuccess(state, action);
+    case FILTER_DASHBOARD:
+      return filterDashboard(state, action);
     case RESET_RESULTS:
       return resetResults(state);
     case HIGHLIGHT_ITEM:

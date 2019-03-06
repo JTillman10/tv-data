@@ -8,3 +8,7 @@ export const SearchShow = searchParameter => {
 export const GetPopularShows = () => {
   return axios.get(`${BASEURL}/tv/popular`, { params: { api_key: APIKEY } });
 };
+
+export const GetTopRatedShows = () => {
+  return axios.get(`${BASEURL}/tv/top_rated`, { params: { api_key: APIKEY } });
+};

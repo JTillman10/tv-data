@@ -1,7 +1,7 @@
-import { GetPopularShows, SearchShow } from '../../api/search';
+import { GetPopularShows, GetTopRatedShows, SearchShow } from '../../api/search';
 
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
-export const GET_POPULAR_SHOWS = 'GET_POPULAR_SHOWS';
+export const FILTER_DASHBOARD = 'FILTER_DASHBOARD';
 export const RESET_RESULTS = 'RESET_RESULTS';
 export const HIGHLIGHT_ITEM_DOWN = 'HIGHLIGHT_ITEM_DOWN';
 export const HIGHLIGHT_ITEM_UP = 'HIGHLIGHT_ITEM_UP';
@@ -14,9 +14,10 @@ const searchSuccess = searchResults => {
   };
 };
 
-const getPopularShowsSuccess = results => {
+const filterDashboardSuccess = (filterType, results) => {
   return {
-    type: GET_POPULAR_SHOWS,
+    type: FILTER_DASHBOARD,
+    filterType,
     results
   };
 };
@@ -30,8 +31,25 @@ export const resetSearchResults = () => {
 export const getPopularShows = () => {
   return dispatch =>
     GetPopularShows().then(response => {
-      dispatch(getPopularShowsSuccess(response.data.results));
+      dispatch(filterDashboardSuccess('popular', response.data.results));
     });
+};
+
+export const getTopRatedShows = () => {
+  return dispatch =>
+    GetTopRatedShows().then(response => {
+      dispatch(filterDashboardSuccess('topRated', response.data.results));
+    });
+};
+
+export const filterDashboard = newFilter => {
+  return dispatch => {
+    if (newFilter === 'popular') {
+      dispatch(getPopularShows());
+    } else if (newFilter === 'topRated') {
+      dispatch(getTopRatedShows());
+    }
+  };
 };
 
 export const search = searchParameter => {
