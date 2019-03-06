@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import { ShowDetail } from './ShowDetail';
 import { Overview } from '../../components/Show/Overview/Overview';
-import { Episodes } from '../../components/Show/Episodes/Episodes';
+import Episodes from '../../components/Show/Episodes/Episodes';
 import { SeasonList } from '../../components/Show/SeasonsList/SeasonList';
 import { RatingsChart } from '../../components/Show/RatingsChart/RatingsChart';
 
@@ -179,17 +179,6 @@ describe('<ShowDetail />', () => {
 
     it('renders', () => {
       expect(episode.exists()).toBe(true);
-    });
-
-    it('has correct episodes', () => {
-      expect(episode.prop('episodes')).toBe(episodes);
-    });
-
-    it('has correct selectedEpisode', () => {
-      expect(episode.prop('selectedEpisode')).toEqual({
-        season: selectedEpisodeSeasonNumber,
-        episode: selectedEpisodeNumber
-      });
     });
   });
 });

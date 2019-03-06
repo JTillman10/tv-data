@@ -83,7 +83,9 @@ export class Episode extends Component {
     return (
       <div className="columns is-vcentered">
         <div className="column is-1">
-          S{this.props.episode.season_number}E{this.props.episode.episode_number}
+          <h1 className="title is-uppercase is-5">
+            S{this.props.episode.season_number}E{this.props.episode.episode_number}
+          </h1>
         </div>
         <div className="column is-2">{still}</div>
         <div className="column is-7">

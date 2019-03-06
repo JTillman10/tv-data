@@ -23,13 +23,10 @@ fdescribe('<Episodes />', () => {
     }
   ];
 
-  const selectedEpisode = {
-    season: 1,
-    episode: 1
-  };
+  const selectedEpisodeId = 1;
 
   beforeEach(() => {
-    wrapper = shallow(<Episodes episodes={episodes} selectedEpisode={selectedEpisode} />);
+    wrapper = shallow(<Episodes episodes={episodes} selectedEpisodeId={selectedEpisodeId} />);
   });
 
   it('renders', () => {

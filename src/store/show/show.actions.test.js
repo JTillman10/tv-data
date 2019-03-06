@@ -51,11 +51,10 @@ describe('ShowActions', () => {
 
   describe('selectEpisode', () => {
     it('should create SELECT_EPISODE', () => {
-      const seasonNumber = 1;
-      const episodeNumber = 1;
-      const expectedAction = { type: SELECT_EPISODE, seasonNumber, episodeNumber };
+      const selectedEpisodeId = 1;
+      const expectedAction = { type: SELECT_EPISODE, selectedEpisodeId };
 
-      const result = selectEpisode(seasonNumber, episodeNumber);
+      const result = selectEpisode(selectedEpisodeId);
       expect(result).toEqual(expectedAction);
     });
   });

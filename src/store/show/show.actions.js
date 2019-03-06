@@ -27,11 +27,10 @@ export const getShow = showId => {
   };
 };
 
-export const selectEpisode = (seasonNumber, episodeNumber) => {
+export const selectEpisode = selectedEpisodeId => {
   return {
     type: SELECT_EPISODE,
-    seasonNumber: seasonNumber,
-    episodeNumber: episodeNumber
+    selectedEpisodeId
   };
 };
 

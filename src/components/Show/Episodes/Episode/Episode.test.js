@@ -6,7 +6,7 @@ import { Episode } from './Episode';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-describe('<Episodes />', () => {
+describe('<Episode />', () => {
   let wrapper;
 
   const episode = {
@@ -25,13 +25,23 @@ describe('<Episodes />', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  it('should format the episode number  in the first column', () => {
-    const firstColumn = wrapper.find('div.column h1.title.is-4').first();
+  describe('componentDidMount', () => {
+    //TODO: test component did mount
+  });
+
+  it('should format the episode number in the first column', () => {
+    const firstColumn = wrapper.find('div.column.is-1 h1.title').first();
     const correctText = `S${episode.season_number}E${episode.episode_number}`;
     expect(firstColumn.text()).toBe(correctText);
   });
 
-  it('should display the name in the second column header', () => {
+  it('should display a figure if the state has a still path', () => {
+    wrapper.setState({ stillPath: 'path' });
+    const figure = wrapper.find('figure').first();
+    expect(figure.exists()).toBe(true);
+  });
+
+  it('should display the name in the third column header', () => {
     const secondColumnHeader = wrapper.find('div.column.is-7 h1').first();
     expect(secondColumnHeader.text()).toBe(episode.name);
   });

@@ -9,8 +9,7 @@ const initialState = {
   showInfo: null,
   selectedSeason: 1,
   episodes: null,
-  selectedEpisodeNumber: null,
-  selectedEpisodeSeasonNumber: null
+  selectedEpisodeId: null
 };
 
 const getShow = (state, action) => {
@@ -37,8 +36,7 @@ const updateSelectedSeason = (state, action) => {
 const selectEpisode = (state, action) => {
   return {
     ...state,
-    selectedEpisodeSeasonNumber: action.seasonNumber,
-    selectedEpisodeNumber: action.episodeNumber
+    selectedEpisodeId: action.selectedEpisodeId
   };
 };
 

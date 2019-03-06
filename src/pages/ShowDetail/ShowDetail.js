@@ -7,7 +7,7 @@ import './ShowDetail.scss';
 import { Overview } from '../../components/Show/Overview/Overview';
 import { RatingsChart } from '../../components/Show/RatingsChart/RatingsChart';
 import { SeasonList } from '../../components/Show/SeasonsList/SeasonList';
-import { Episodes } from '../../components/Show/Episodes/Episodes';
+import Episodes from '../../components/Show/Episodes/Episodes';
 
 import {
   getShow,
@@ -29,12 +29,8 @@ export class ShowDetail extends Component {
     }
   }
 
-  episodeSelectedHandler = (seasonNumber, episodeNumber) => {
-    this.props.onEpisodeSelected(seasonNumber, episodeNumber);
-    const element = document.getElementById(`s${seasonNumber}e${episodeNumber}`);
-    if (element) {
-      element.scrollIntoView();
-    }
+  episodeSelectedHandler = selectedEpisodeId => {
+    this.props.onEpisodeSelected(selectedEpisodeId);
   };
 
   seasonSelectedHandler = event => {
@@ -74,18 +70,13 @@ export class ShowDetail extends Component {
                   numberOfSeasons={this.props.showInfo.number_of_seasons}
                   selectedSeason={this.props.selectedSeason}
                   onSelectEpisode={this.episodeSelectedHandler}
+                  selectedEpisodeId={this.props.selectedEpisodeId}
                 />
               </div>
             </div>
           </div>
           <div className="container">
-            <Episodes
-              episodes={this.props.episodes}
-              selectedEpisode={{
-                season: this.props.selectedEpisodeSeasonNumber,
-                episode: this.props.selectedEpisodeNumber
-              }}
-            />
+            <Episodes />
           </div>
         </div>
       );
@@ -98,11 +89,9 @@ export class ShowDetail extends Component {
 const mapStateToProps = state => {
   return {
     showInfo: state.show.showInfo,
-    // selectedEpisode: state.show,
     selectedSeason: state.show.selectedSeason,
     episodes: state.show.episodes,
-    selectedEpisodeSeasonNumber: state.show.selectedEpisodeSeasonNumber,
-    selectedEpisodeNumber: state.show.selectedEpisodeNumber
+    selectedEpisodeId: state.show.selectedEpisodeId
   };
 };
 
@@ -112,10 +101,7 @@ const mapDispatchToProps = dispatch => {
     onGetEpisodesForSeason: (showId, newSeasonNumber, totalSeasons) =>
       dispatch(getEpisodesForSeason(showId, newSeasonNumber, totalSeasons)),
     onUpdateSelectedSeason: newSeasonNumber => dispatch(updateSelectedSeason(newSeasonNumber)),
-    onEpisodeSelected: (seasonNumber, episodeNumber) =>
-      dispatch(selectEpisode(seasonNumber, episodeNumber))
-    // onGetEpisode: (showId, seasonNumber, episodeNumber) =>
-    //   dispatch(getEpisode(showId, seasonNumber, episodeNumber))
+    onEpisodeSelected: selectedEpisodeId => dispatch(selectEpisode(selectedEpisodeId))
   };
 };
 
