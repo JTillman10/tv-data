@@ -1,9 +1,9 @@
 import { ShowReducer } from './show.reducer';
 import {
   GET_SHOW,
-  GET_EPISODE,
   GET_EPISODES_FOR_SEASON,
-  UPDATE_SELECTED_SEASON
+  UPDATE_SELECTED_SEASON,
+  SELECT_EPISODE
 } from './show.actions';
 
 describe('ShowReducer', () => {
@@ -12,7 +12,7 @@ describe('ShowReducer', () => {
     showInfo: null,
     selectedSeason: 1,
     episodes: null,
-    selectedEpisode: null
+    selectedEpisodeId: null
   };
 
   beforeEach(() => {
@@ -35,18 +35,7 @@ describe('ShowReducer', () => {
       showInfo,
       selectedSeason: 1,
       episodes: null,
-      selectedEpisode: null
-    });
-  });
-
-  it('should handle GET_EPISODE', () => {
-    const selectedEpisode = 'selectedEpisode';
-    const result = reducer(initialState, { type: GET_EPISODE, selectedEpisode });
-    expect(result).toEqual({
-      showInfo: null,
-      selectedSeason: 1,
-      episodes: null,
-      selectedEpisode
+      selectedEpisodeId: null
     });
   });
 
@@ -57,7 +46,7 @@ describe('ShowReducer', () => {
       showInfo: null,
       selectedSeason: 1,
       episodes,
-      selectedEpisode: null
+      selectedEpisodeId: null
     });
   });
 
@@ -68,7 +57,21 @@ describe('ShowReducer', () => {
       showInfo: null,
       selectedSeason,
       episodes: null,
-      selectedEpisode: null
+      selectedEpisodeId: null
+    });
+  });
+
+  it('should handle SELECT_EPISODE', () => {
+    const selectedEpisodeId = 1;
+    const result = reducer(initialState, {
+      type: SELECT_EPISODE,
+      selectedEpisodeId
+    });
+    expect(result).toEqual({
+      showInfo: null,
+      selectedSeason: 1,
+      episodes: null,
+      selectedEpisodeId
     });
   });
 });

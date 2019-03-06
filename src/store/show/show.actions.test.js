@@ -6,13 +6,13 @@ import { APIKEY, BASEURL } from '../../api/constants';
 
 import {
   GET_SHOW,
-  GET_EPISODE,
   GET_EPISODES_FOR_SEASON,
   UPDATE_SELECTED_SEASON,
   getShow,
-  getEpisode,
   getEpisodesForSeason,
-  updateSelectedSeason
+  updateSelectedSeason,
+  SELECT_EPISODE,
+  selectEpisode
 } from './show.actions';
 
 const middlewares = [thunk];
@@ -49,27 +49,13 @@ describe('ShowActions', () => {
     });
   });
 
-  describe('getEpisode', () => {
-    it('should create GET_EPISODE', async done => {
-      const showId = 1;
-      const seasonNumber = 1;
-      const episodeNumber = 1;
-      const selectedEpisode = 'selectedEpisode';
-      moxios.stubRequest(
-        `${BASEURL}/tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${APIKEY}`,
-        {
-          status: 200,
-          response: selectedEpisode
-        }
-      );
+  describe('selectEpisode', () => {
+    it('should create SELECT_EPISODE', () => {
+      const selectedEpisodeId = 1;
+      const expectedAction = { type: SELECT_EPISODE, selectedEpisodeId };
 
-      const expectedActions = [{ type: GET_EPISODE, selectedEpisode }];
-      await store.dispatch(getEpisode(showId, seasonNumber, episodeNumber)).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-      });
-
-      moxios.uninstall();
-      done();
+      const result = selectEpisode(selectedEpisodeId);
+      expect(result).toEqual(expectedAction);
     });
   });
 
