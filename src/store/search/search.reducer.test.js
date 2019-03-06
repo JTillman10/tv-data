@@ -5,7 +5,7 @@ import {
   HIGHLIGHT_ITEM,
   HIGHLIGHT_ITEM_DOWN,
   HIGHLIGHT_ITEM_UP,
-  GET_POPULAR_SHOWS
+  FILTER_DASHBOARD
 } from './search.actions';
 
 describe('SearchReducer', () => {
@@ -13,6 +13,7 @@ describe('SearchReducer', () => {
   const initialState = {
     searchResults: [],
     highlightedItem: null,
+    dashboardFilter: 'popular',
     dashboardItems: []
   };
 
@@ -35,16 +36,23 @@ describe('SearchReducer', () => {
     expect(result).toEqual({
       searchResults,
       highlightedItem: null,
+      dashboardFilter: 'popular',
       dashboardItems: []
     });
   });
 
-  it('should handle GET_POPULAR_SHOWS', () => {
+  it('should handle FILTER_DASHBOARD', () => {
     const dashboardItems = 'dashboardItems';
-    const result = reducer(initialState, { type: GET_POPULAR_SHOWS, results: dashboardItems });
+    const dashboardFilter = 'dashboardFilter';
+    const result = reducer(initialState, {
+      type: FILTER_DASHBOARD,
+      filterType: dashboardFilter,
+      results: dashboardItems
+    });
     expect(result).toEqual({
       searchResults: [],
       highlightedItem: null,
+      dashboardFilter,
       dashboardItems
     });
   });
@@ -53,12 +61,14 @@ describe('SearchReducer', () => {
     const state = {
       searchResults: 'searchResults',
       highlightedItem: null,
+      dashboardFilter: 'popular',
       dashboardItems: []
     };
     const result = reducer(state, { type: RESET_RESULTS });
     expect(result).toEqual({
       searchResults: [],
       highlightedItem: null,
+      dashboardFilter: 'popular',
       dashboardItems: []
     });
   });
@@ -69,6 +79,7 @@ describe('SearchReducer', () => {
     expect(result).toEqual({
       searchResults: [],
       highlightedItem,
+      dashboardFilter: 'popular',
       dashboardItems: []
     });
   });
@@ -77,6 +88,7 @@ describe('SearchReducer', () => {
     const state = {
       searchResults: new Array(5),
       highlightedItem: null,
+      dashboardFilter: 'popular',
       dashboardItems: []
     };
 
@@ -85,6 +97,7 @@ describe('SearchReducer', () => {
       expect(result).toEqual({
         searchResults: new Array(5),
         highlightedItem: 0,
+        dashboardFilter: 'popular',
         dashboardItems: []
       });
     });
@@ -95,6 +108,7 @@ describe('SearchReducer', () => {
       expect(result).toEqual({
         searchResults: new Array(5),
         highlightedItem: 0,
+        dashboardFilter: 'popular',
         dashboardItems: []
       });
     });
@@ -105,6 +119,7 @@ describe('SearchReducer', () => {
       expect(result).toEqual({
         searchResults: new Array(5),
         highlightedItem: 4,
+        dashboardFilter: 'popular',
         dashboardItems: []
       });
     });
@@ -114,6 +129,7 @@ describe('SearchReducer', () => {
     const state = {
       searchResults: new Array(5),
       highlightedItem: null,
+      dashboardFilter: 'popular',
       dashboardItems: []
     };
 
@@ -122,6 +138,7 @@ describe('SearchReducer', () => {
       expect(result).toEqual({
         searchResults: new Array(5),
         highlightedItem: 4,
+        dashboardFilter: 'popular',
         dashboardItems: []
       });
     });
@@ -131,6 +148,7 @@ describe('SearchReducer', () => {
       expect(result).toEqual({
         searchResults: new Array(5),
         highlightedItem: 4,
+        dashboardFilter: 'popular',
         dashboardItems: []
       });
     });
@@ -141,6 +159,7 @@ describe('SearchReducer', () => {
       expect(result).toEqual({
         searchResults: new Array(5),
         highlightedItem: 2,
+        dashboardFilter: 'popular',
         dashboardItems: []
       });
     });

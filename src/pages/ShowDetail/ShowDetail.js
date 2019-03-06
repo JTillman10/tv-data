@@ -48,7 +48,7 @@ export class ShowDetail extends Component {
   render() {
     if (this.props.showInfo) {
       return (
-        <div className="section">
+        <section className="section is-paddingless">
           <div className="container">
             <Overview
               name={this.props.showInfo.original_name}
@@ -56,7 +56,7 @@ export class ShowDetail extends Component {
               summary={this.props.showInfo.overview}
             />
           </div>
-          <div className="section">
+          <section className="section is-paddingless">
             <div className="container">
               <div className="box">
                 <SeasonList
@@ -74,11 +74,11 @@ export class ShowDetail extends Component {
                 />
               </div>
             </div>
-          </div>
+          </section>
           <div className="container">
             <Episodes />
           </div>
-        </div>
+        </section>
       );
     } else {
       return <div />;

@@ -14,8 +14,8 @@ import {
   HIGHLIGHT_ITEM_UP,
   HIGHLIGHT_ITEM,
   resetSearchResults,
-  GET_POPULAR_SHOWS,
-  getPopularShows
+  FILTER_DASHBOARD,
+  filterDashboard
 } from './search.actions';
 
 const middlewares = [thunk];
@@ -30,10 +30,11 @@ describe('SearchActions', () => {
     });
 
     it('should create SEARCH_SUCCESS when searchParameter has length greater than 3', async done => {
-      moxios.install();
-
       const searchParameter = 'aaaa';
       const searchResults = 'results';
+
+      moxios.install();
+
       moxios.stubRequest(`${BASEURL}/search/tv?api_key=${APIKEY}&query=${searchParameter}`, {
         status: 200,
         response: { results: searchResults }
@@ -47,14 +48,6 @@ describe('SearchActions', () => {
       moxios.uninstall();
       done();
     });
-
-    it('should create RESET_RESULTS when searchParameter has length 3 or less', () => {
-      const searchParameter = 'aaa';
-
-      const expectedActions = [{ type: RESET_RESULTS }];
-      store.dispatch(search(searchParameter));
-      expect(store.getActions()).toEqual(expectedActions);
-    });
   });
 
   describe('resetSearchResults', () => {
@@ -64,28 +57,43 @@ describe('SearchActions', () => {
     });
   });
 
-  describe('getPopularShows', () => {
-    let store;
+  describe('filterDashboard', () => {
+    let store,
+      popularResults = ['popular show'],
+      topRatedResults = ['top rated show'];
 
     beforeEach(() => {
       store = mockStore({});
-    });
 
-    it('should create GET_POPULAR_SHOWS when searchParameter has length greater than 3', async done => {
       moxios.install();
 
       const results = 'results';
       moxios.stubRequest(`${BASEURL}/tv/popular?api_key=${APIKEY}`, {
         status: 200,
-        response: { results }
+        response: { results: popularResults }
       });
 
-      const expectedActions = [{ type: GET_POPULAR_SHOWS, results }];
-      await store.dispatch(getPopularShows()).then(() => {
+      moxios.stubRequest(`${BASEURL}/tv/top_rated?api_key=${APIKEY}`, {
+        status: 200,
+        response: { results: topRatedResults }
+      });
+    });
+
+    afterEach(() => {
+      moxios.uninstall();
+    });
+
+    it('when newFilter is popular it should create FILTER_DASHBOARD with popular filterType ', async done => {
+      const newFilter = 'popular';
+
+      const expectedActions = [
+        { type: FILTER_DASHBOARD, filterType: newFilter, results: popularResults }
+      ];
+
+      await store.dispatch(filterDashboard(newFilter)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
 
-      moxios.uninstall();
       done();
     });
   });
