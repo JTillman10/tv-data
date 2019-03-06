@@ -45,9 +45,9 @@ export const getTopRatedShows = () => {
 export const filterDashboard = newFilter => {
   return dispatch => {
     if (newFilter === 'popular') {
-      dispatch(getPopularShows());
+      return dispatch(getPopularShows());
     } else if (newFilter === 'topRated') {
-      dispatch(getTopRatedShows());
+      return dispatch(getTopRatedShows());
     }
   };
 };
