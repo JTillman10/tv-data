@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { APIKEY, BASEURL, BASEIMAGEURL } from './constants';
 
+const delay = t => new Promise(resolve => setTimeout(resolve, t));
+
 export const GetShow = showId => {
   return axios.get(`${BASEURL}/tv/${showId}`, { params: { api_key: APIKEY } });
 };
@@ -41,10 +43,18 @@ export const GetImageUrl = imageUrl => {
 };
 
 export const GetEpisodeStillUrls = (showId, seasonNumber, episodeNumber) => {
-  return axios.get(
-    `${BASEURL}/tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}/images`,
-    {
+  return axios
+    .get(`${BASEURL}/tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}/images`, {
       params: { api_key: APIKEY }
-    }
-  );
+    })
+    .then(response => {
+      return response;
+    })
+    .catch(error => {
+      if (error.response.status === 429) {
+        return delay(10 * 1000).then(() => {
+          return GetEpisodeStillUrls(showId, seasonNumber, episodeNumber);
+        });
+      }
+    });
 };

@@ -17,17 +17,23 @@ export class Episode extends Component {
       this.props.episode.season_number,
       this.props.episode.episode_number
     ).then(response => {
-      const stillIndex = Math.floor(Math.random() * response.data.stills.length);
-      const stillPath = response.data.stills[stillIndex].file_path;
+      if (response.data.stills.length > 0) {
+        const stillIndex = Math.floor(Math.random() * response.data.stills.length);
+        const stillPath = response.data.stills[stillIndex].file_path;
 
-      this.setState({ stillPath });
+        this.setState({ stillPath });
+      }
     });
   }
 
   formatDate = date => {
-    let [year, month, day] = date.split('-');
-    month = month[0] === '0' ? month[1] : month;
-    return `${month}/${day}/${year}`;
+    if (date) {
+      let [year, month, day] = date.split('-');
+      month = month[0] === '0' ? month[1] : month;
+      return `${month}/${day}/${year}`;
+    } else {
+      return null;
+    }
   };
 
   getPeriodIndex = overview => {
