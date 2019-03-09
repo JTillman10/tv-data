@@ -1,17 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { GetImageUrl } from '../../../../api/show';
+import './ShowCard.scss';
+
+import Image from '../../../UI/Image/Image';
 
 export const ShowCard = props => {
   const detailLink = `/shows/${props.showId}`;
   return (
     <Link to={detailLink}>
-      <div className="card">
+      <div className="card ShowCard">
         <div className="card-image">
-          <figure className="image">
-            <img src={GetImageUrl(props.imageUrl)} alt={props.showName} />
-          </figure>
+          <Image url={props.imageUrl} alt={props.showName} />
         </div>
         <div className="card-content has-text-centered">
           <div className="content">{props.showName}</div>

@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 
+import { BaseReducer } from './base/base.reducer';
 import { SearchReducer } from './search/search.reducer';
 import { ShowReducer } from './show/show.reducer';
 
@@ -10,6 +11,7 @@ const composeEnhancers =
     : null || compose;
 
 const rootReducer = combineReducers({
+  base: BaseReducer,
   search: SearchReducer,
   show: ShowReducer
 });
