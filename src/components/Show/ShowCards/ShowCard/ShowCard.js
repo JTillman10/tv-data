@@ -1,15 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import './ShowCard.scss';
-
 import Image from '../../../UI/Image/Image';
 
 export const ShowCard = props => {
   const detailLink = `/shows/${props.showId}`;
   return (
     <Link to={detailLink}>
-      <div className="card ShowCard">
+      <div className="card grow">
         <div className="card-image">
           <Image url={props.imageUrl} alt={props.showName} />
         </div>

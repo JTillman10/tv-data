@@ -14,7 +14,11 @@ export class Episodes extends Component {
           <tr
             id={`episode-${episode.id}`}
             key={episode.id}
-            className={episode.id === this.props.selectedEpisodeId ? 'is-selected' : ''}
+            // className={episode.id === this.props.selectedEpisodeId ? 'is-selected' : ''}
+            className={[
+              episode.id === this.props.selectedEpisodeId ? 'is-selected' : '',
+              'grow'
+            ].join(' ')}
             onClick={() => this.props.onEpisodeSelected(episode.id)}
           >
             <td>
