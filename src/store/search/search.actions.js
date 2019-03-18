@@ -32,7 +32,7 @@ export const resetSearchResults = () => {
 export const getPopularShows = () => {
   return dispatch => {
     dispatch(startLoading());
-    GetPopularShows().then(response => {
+    return GetPopularShows().then(response => {
       dispatch(filterDashboardSuccess('popular', response.data.results));
       dispatch(stopLoading());
     });
@@ -42,7 +42,7 @@ export const getPopularShows = () => {
 export const getTopRatedShows = () => {
   return dispatch => {
     dispatch(startLoading());
-    GetTopRatedShows().then(response => {
+    return GetTopRatedShows().then(response => {
       dispatch(filterDashboardSuccess('topRated', response.data.results));
       dispatch(stopLoading());
     });
@@ -50,13 +50,11 @@ export const getTopRatedShows = () => {
 };
 
 export const filterDashboard = newFilter => {
-  return dispatch => {
-    if (newFilter === 'popular') {
-      dispatch(getPopularShows());
-    } else if (newFilter === 'topRated') {
-      dispatch(getTopRatedShows());
-    }
-  };
+  if (newFilter === 'popular') {
+    return getPopularShows();
+  } else if (newFilter === 'topRated') {
+    return getTopRatedShows();
+  }
 };
 
 export const search = searchParameter => {

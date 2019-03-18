@@ -3,6 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { Episode } from './Episode';
+import Image from '../../../UI/Image/Image';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -35,10 +36,10 @@ describe('<Episode />', () => {
     expect(firstColumn.text()).toBe(correctText);
   });
 
-  it('should display a figure if the state has a still path', () => {
+  it('should display a Image if the state has a still path', () => {
     wrapper.setState({ stillPath: 'path' });
-    const figure = wrapper.find('figure').first();
-    expect(figure.exists()).toBe(true);
+    const image = wrapper.find(Image).first();
+    expect(image.exists()).toBe(true);
   });
 
   it('should display the name in the third column header', () => {

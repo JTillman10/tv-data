@@ -40,6 +40,6 @@ fdescribe('<Episodes />', () => {
 
   it('should mark the selected episode row', () => {
     const selectedRow = wrapper.find('tr').first();
-    expect(selectedRow.prop('className')).toBe('is-selected');
+    expect(selectedRow.prop('className')).toBe('is-selected grow');
   });
 });

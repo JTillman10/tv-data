@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import { shallow } from 'enzyme';
 
 import { ShowCard } from './ShowCard';
-
-import { GetImageUrl } from '../../../../api/show';
+import Image from '../../../UI/Image/Image';
 
 describe('<ShowCard />', () => {
   let wrapper;
@@ -32,9 +31,9 @@ describe('<ShowCard />', () => {
   });
 
   it('has an image with the correct url', () => {
-    const expectedUrl = GetImageUrl(imageUrl);
-    const image = wrapper.find('img').first();
-    expect(image.prop('src')).toBe(expectedUrl);
+    const expectedUrl = imageUrl;
+    const image = wrapper.find(Image).first();
+    expect(image.prop('url')).toBe(expectedUrl);
   });
 
   it('displays the show name', () => {
