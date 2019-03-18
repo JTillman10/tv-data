@@ -1,11 +1,12 @@
 import React from 'react';
 
 export const DashboardFilter = props => {
+  const { onChangeFilter } = props;
   return (
     <div className="field">
       <div className="control">
         <div className="select">
-          <select onChange={props.onChangeFilter}>
+          <select onChange={onChangeFilter}>
             <option key="popular" value={'popular'}>
               Popular
             </option>
