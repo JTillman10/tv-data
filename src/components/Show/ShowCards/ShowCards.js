@@ -3,10 +3,11 @@ import React from 'react';
 import { ShowCard } from './ShowCard/ShowCard';
 
 export const ShowCards = props => {
+  const { shows } = props;
   let cardColumns = <div />;
 
-  if (props.shows.length > 0) {
-    cardColumns = props.shows.map(show => {
+  if (shows.length > 0) {
+    cardColumns = shows.map(show => {
       return (
         <div
           className="column is-one-fifth-widescreen is-one-quarter-desktop is-one-third-tablet is-half-mobile"

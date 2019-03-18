@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import ShowSearch from '../../../containers/ShowSearch/ShowSearch';
+import ShowSearch from '../../ShowSearch/ShowSearch';
 
 export const Navbar = props => {
   return (

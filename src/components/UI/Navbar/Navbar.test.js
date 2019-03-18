@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { shallow } from 'enzyme';
 
 import { Navbar } from './Navbar';
-import ShowSearch from '../../../containers/ShowSearch/ShowSearch';
+import ShowSearch from '../../ShowSearch/ShowSearch';
 
 describe('<Navbar />', () => {
   let wrapper;
