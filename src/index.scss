@@ -18,3 +18,15 @@
 // $menu-item-active-background-color: $grey;
 
 // @import '~bulma/bulma';
+
+html {
+  background-color: #343c3d !important;
+}
+
+.grow {
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+}

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { GetEpisodeStillUrls, GetImageUrl } from '../../../../api/show';
+import { GetEpisodeStillUrls } from '../../../../api/show';
+
+import Image from '../../../UI/Image/Image';
 
 const OVERVIEW_LENGTH = 175;
 
@@ -79,11 +81,7 @@ export class Episode extends Component {
 
     let still;
     if (this.state.stillPath) {
-      still = (
-        <figure className="image">
-          <img src={GetImageUrl(this.state.stillPath)} alt={this.props.episode.name} />
-        </figure>
-      );
+      still = <Image url={this.state.stillPath} alt={this.props.episode.name} />;
     }
 
     return (

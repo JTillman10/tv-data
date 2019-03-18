@@ -5,7 +5,7 @@ export const Layout = props => {
   return (
     <Fragment>
       <Navbar />
-      <section className="hero is-fullheight">{props.children}</section>
+      <section className="hero">{props.children}</section>
     </Fragment>
   );
 };

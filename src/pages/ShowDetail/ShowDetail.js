@@ -91,7 +91,8 @@ const mapStateToProps = state => {
     showInfo: state.show.showInfo,
     selectedSeason: state.show.selectedSeason,
     episodes: state.show.episodes,
-    selectedEpisodeId: state.show.selectedEpisodeId
+    selectedEpisodeId: state.show.selectedEpisodeId,
+    isLoading: state.base.isLoading
   };
 };
 

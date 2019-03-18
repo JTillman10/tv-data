@@ -6,6 +6,7 @@ import { DashboardFilter } from '../../components/DashboardFilter/DashboardFilte
 import { ShowCards } from '../../components/Show/ShowCards/ShowCards';
 
 import { filterDashboard } from '../../store/search/search.actions';
+import { Spinner } from '../../components/UI/Spinner/Spinner';
 
 export class Dashboard extends Component {
   componentDidMount() {
@@ -18,6 +19,15 @@ export class Dashboard extends Component {
   };
 
   render() {
+    let spinner;
+    if (this.props.isLoading) {
+      spinner = (
+        <div className="has-text-centered">
+          <Spinner />
+        </div>
+      );
+    }
+
     return (
       <Fragment>
         <section className="section">
@@ -27,7 +37,10 @@ export class Dashboard extends Component {
         </section>
         <section className="section is-paddingless">
           <div className="container">
-            <ShowCards shows={this.props.dashboardItems} />
+            {spinner}
+            <div className={this.props.isLoading ? 'is-invisible' : ''}>
+              <ShowCards shows={this.props.dashboardItems} />
+            </div>
           </div>
         </section>
       </Fragment>
@@ -37,6 +50,7 @@ export class Dashboard extends Component {
 
 const mapStateToProps = state => {
   return {
+    isLoading: state.base.isLoading,
     dashboardFilter: state.search.dashboardFilter,
     dashboardItems: state.search.dashboardItems
   };

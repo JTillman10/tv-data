@@ -39,7 +39,11 @@ describe('ShowActions', () => {
         response: showInfo
       });
 
-      const expectedActions = [{ type: GET_SHOW, showInfo }];
+      const expectedActions = [
+        { type: 'START_LOADING' },
+        { type: GET_SHOW, showInfo },
+        { type: 'STOP_LOADING' }
+      ];
       await store.dispatch(getShow(showId)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
@@ -78,7 +82,11 @@ describe('ShowActions', () => {
         });
       }
 
-      const expectedActions = [{ type: GET_EPISODES_FOR_SEASON, episodes: allEpisodes }];
+      const expectedActions = [
+        { type: 'START_LOADING' },
+        { type: GET_EPISODES_FOR_SEASON, episodes: allEpisodes },
+        { type: 'STOP_LOADING' }
+      ];
       await store.dispatch(getEpisodesForSeason(showId, 'all', totalSeasons)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
@@ -95,7 +103,11 @@ describe('ShowActions', () => {
         response: { episodes: episodes[seasonNumber] }
       });
 
-      const expectedActions = [{ type: GET_EPISODES_FOR_SEASON, episodes: season1Episodes }];
+      const expectedActions = [
+        { type: 'START_LOADING' },
+        { type: GET_EPISODES_FOR_SEASON, episodes: season1Episodes },
+        { type: 'STOP_LOADING' }
+      ];
       await store.dispatch(getEpisodesForSeason(showId, seasonNumber, totalSeasons)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });

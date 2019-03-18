@@ -58,16 +58,15 @@ describe('SearchActions', () => {
   });
 
   describe('filterDashboard', () => {
-    let store,
-      popularResults = ['popular show'],
-      topRatedResults = ['top rated show'];
+    it('when newFilter is popular it should create FILTER_DASHBOARD with popular filterType ', async done => {
+      let store,
+        popularResults = ['popular show'],
+        topRatedResults = ['top rated show'];
 
-    beforeEach(() => {
       store = mockStore({});
 
       moxios.install();
 
-      const results = 'results';
       moxios.stubRequest(`${BASEURL}/tv/popular?api_key=${APIKEY}`, {
         status: 200,
         response: { results: popularResults }
@@ -77,23 +76,19 @@ describe('SearchActions', () => {
         status: 200,
         response: { results: topRatedResults }
       });
-    });
-
-    afterEach(() => {
-      moxios.uninstall();
-    });
-
-    it('when newFilter is popular it should create FILTER_DASHBOARD with popular filterType ', async done => {
       const newFilter = 'popular';
 
       const expectedActions = [
-        { type: FILTER_DASHBOARD, filterType: newFilter, results: popularResults }
+        { type: 'START_LOADING' },
+        { type: FILTER_DASHBOARD, filterType: newFilter, results: popularResults },
+        { type: 'STOP_LOADING' }
       ];
 
       await store.dispatch(filterDashboard(newFilter)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
 
+      moxios.uninstall();
       done();
     });
   });
